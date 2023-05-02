@@ -62,7 +62,7 @@ class Ui_MainWindow(object):
         self.label_loading.setStyleSheet(u"color: rgb(255, 255, 255);\n"
 "font: 14pt \"Consolas\";")
         self.label_loading.setAlignment(Qt.AlignCenter)
-        self.stackedWidget.addWidget(self.page_1)
+        # self.stackedWidget.addWidget(self.page_1)
         self.page_3 = QWidget()
         self.page_3.setObjectName(u"page_3")
         self.widget_1 = AnalogGaugeWidget(self.page_3)
