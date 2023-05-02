@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>korail2.png</file>
+    <file>korail.png</file>
+  </qresource>
+</RCC>
