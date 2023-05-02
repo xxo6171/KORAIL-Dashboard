@@ -1,0 +1,226 @@
+{
+  "AnalogGaugeWidget": [
+    {
+      "name": "widget_1",
+      "units": "rpm",
+      "minValue":"0",
+      "maxValue": "80",
+      "scalaCount": "8",
+      "scaleFontSize": "30",
+      "valueFontSize": "50",
+      "scaleValueColor": "white",
+      "displayValueColor": "white",
+      "setScalePolygonColorHalf": true,
+      "needleColor": "red",
+      "valueFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "scaleFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "outerCircleColor": [{
+            "color1": "black"
+      }],
+      "scalePolygonColor": [{
+			"color1": "green",
+            "color2": "red"
+		}],
+      "bigScaleColor" : "black",
+      "fineScaleColor" : "black"
+    },
+    {
+      "name": "widget_2",
+      "units": "km/h",
+      "minValue":"0",
+      "maxValue": "200",
+      "scalaCount": "10",
+      "scaleFontSize": "30",
+      "valueFontSize": "40",
+      "scaleValueColor": "white",
+      "displayValueColor": "white",
+      "needleColor": "red",
+      "valueFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "scaleFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "outerCircleColor": [{
+            "color1": "black"
+      }],
+      "enableScalePolygon": false,
+      "bigScaleColor" : "red",
+      "fineScaleColor" : "white"
+    },
+    {
+      "name": "widget_3",
+      "units": "BAR",
+      "minValue":"0",
+      "maxValue": "80",
+      "scalaCount": "8",
+      "scaleFontSize": "30",
+      "valueFontSize": "50",
+      "scaleValueColor": "white",
+      "displayValueColor": "white",
+      "needleColor": "red",
+      "valueFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "scaleFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "outerCircleColor": [{
+            "color1": "black"
+      }],
+      "enableScalePolygon": false,
+      "bigScaleColor" : "red",
+      "fineScaleColor" : "white"
+    },
+    {
+      "name": "widget_4",
+      "units": " ",
+      "minValue":"50",
+      "maxValue": "0",
+      "scalaCount": "1",
+      "scaleFontSize": "40",
+      "valueFontSize": "50",
+      "scaleValueColor": "white",
+      "displayValueColor": "white",
+      "scaleStartAngle": "270",
+      "totalScaleAngle": "90",
+      "enableCenterPoint": false,
+      "enableScaleText": false,
+      "needleLength": "0.7",
+      "needleColor": "red",
+      "valueFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "scaleFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "outerCircleColor": [{
+			"color1": "black"
+		}],
+      "setScalePolygonColorInverse": true
+    },
+    {
+      "name": "widget_5",
+      "units": " ",
+      "minValue": "0",
+      "maxValue": "100",
+      "scalaCount": "10",
+      "scaleFontSize": "30",
+      "valueFontSize": "50",
+      "scaleValueColor": "white",
+      "displayValueColor": "white",
+      "needleColor": "red",
+      "valueFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "scaleFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "outerCircleColor": [{
+            "color1": "black"
+      }],
+      "enableScalePolygon": false,
+      "bigScaleColor" : "red",
+      "fineScaleColor" : "white"
+    },
+    {
+      "name": "widget_6",
+      "units": " ",
+      "minValue": "0",
+      "maxValue": "50",
+      "scalaCount": "1",
+      "scaleFontSize": "40",
+      "valueFontSize": "50",
+      "scaleValueColor": "white",
+      "displayValueColor": "white",
+      "scaleStartAngle": "540",
+      "totalScaleAngle": "90",
+      "enableCenterPoint": false,
+      "needleLength": "0.7",
+      "needleColor": "red",
+      "valueFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "scaleFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "outerCircleColor": [{
+			"color1": "black"
+		}]
+    },
+    {
+      "name": "widget_7",
+      "units": " ",
+      "minValue": "0",
+      "maxValue": "50",
+      "scalaCount": "1",
+      "scaleValueColor": "white",
+      "displayValueColor": "white",
+      "scaleFontSize": "40",
+      "valueFontSize": "50",
+      "scaleStartAngle": "180",
+      "totalScaleAngle": "180",
+      "enableCenterPoint": false,
+      "needleLength": "0.5",
+      "needleColor": "red",
+      "outerRadius": "1000",
+      "innerRadius": "900",
+      "valueFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "scaleFontFamily": [
+        {
+          "path": "Fonts/DS-DIGIB.TTF",
+          "name": "DS-Digital"
+        }
+      ],
+      "outerCircleColor": [{
+			"color1": "black"
+		}]
+    }
+
+  ]
+}
