@@ -7,15 +7,15 @@ import multiprocessing as mp
 
 # todo: Convert Text data to Numpy array
 def txt2Numpy(filepath):
-    return np.loadtxt(filepath, dtype=int, delimiter=' ')
+    return np.loadtxt(filepath, dtype=np.uint8, delimiter=' ')
 
 # todo: Get File data to numpy array
 def getDataNumpy(date):
-    filepath = [f'../LogData/widget{i}_{date}.txt' for i in range(1, 12)]
+    filepath = [f'LogData/widget{i}_{date}.txt' for i in range(1, 12)]
     for file in filepath:
         if not path.exists(file):
             return None
-    return np.array(list(map(txt2Numpy, filepath)))
+    return np.array(list(map(txt2Numpy, filepath))).copy()
 
 # todo: Get File data to numpy array using Parallel
 def getDataNumpyParallel(date):
@@ -47,7 +47,7 @@ def dataLogging(widget, date):
         with open(filepath, "w" if not path.exists(filepath) else "a") as f:
             while True:
                 try:
-                    if t == 8640000:
+                    if t == 86400:
                         break
                     # t = time.strftime('%H%M%S')
                     value = random.randrange(0, 201)
@@ -58,9 +58,9 @@ def dataLogging(widget, date):
                     sys.exit(0)
 
 
-# if __name__ == '__main__':
-#     date = time.strftime('%Y%m%d')
-#     dataLogging('widget', date)
+if __name__ == '__main__':
+    date = time.strftime('%Y%m%d')
+    dataLogging('widget', date)
 #     print('Writing Done')
 #     # file_size = os.path.getsize('../LogData/widget1_20230417.txt')
 #     # print("파일 크기: %.2fMB" % (file_size / (1024.0 ** 2)))
