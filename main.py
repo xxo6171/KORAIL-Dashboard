@@ -1,5 +1,5 @@
-import sys
-import time
+from sys import getsizeof, argv, exit
+from time import strftime
 import numpy as np
 from os import environ
 
@@ -21,13 +21,28 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         loadJsonStyle(self, self.ui)
-        model = Model(_date=time.strftime('%Y%m%d'),
-                      _objectId=np.uint8(3),
-                      _data=np.array([], dtype=np.uint8))
-        print(model)
 
+        self.model = Model(_date=strftime('%Y%m%d'),
+                           _data=getDataNumpyParallel(strftime('%Y%m%d')))
 
-# Fixed font size by monitor resolution
+        self.ui_list: list = self.ui.getUiList()
+        self.connectClickUiFunction(self.ui_list, self.ui.pushButton)
+
+    # UI 클릭 이벤트 처리
+    def connectClickUiFunction(self, ui_list: list, button) -> None:
+        for ui in ui_list:
+            clickable(ui).connect(partial(self.switchMain2GraphScreen, ui.objectName()))
+        clickable(button).connect(partial(self.switchGraph2MainScreen))
+
+    # 계기판 위젯 클릭 시 그래프 화면 이동
+    def switchMain2GraphScreen(self, objname: str) -> None:
+        self.ui.stackedWidget.setCurrentIndex(1)
+
+    # 뒤로 가기 버튼 클릭 시 메인 화면 이동
+    def switchGraph2MainScreen(self) -> None:
+        self.ui.stackedWidget.setCurrentIndex(0)
+
+# 폰트 크기 고정 ( 화면 크기가 다를 시 발생 하는 문제 해결 )
 def suppress_qt_warnings():
     environ["QT_DEVICE_PIXEL_RATIO"] = "0"
     environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
@@ -36,8 +51,8 @@ def suppress_qt_warnings():
 
 if __name__ == '__main__':
     suppress_qt_warnings()
-    app = QApplication(sys.argv)
+    app = QApplication(argv)
     window = MainWindow()
     window.setFixedSize(1040, 728)
     window.show()
-    sys.exit(app.exec_())
+    exit(app.exec_())
