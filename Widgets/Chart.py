@@ -27,11 +27,11 @@ class Chart(QWidget):
         else:
             self.update()
 
-    def displayChart(self, data, objname):
+    def displayChart(self, data, idx):
         self.chart = QtCharts.QChart()
         self.series = QtCharts.QLineSeries()
 
-        self.chart.setTitle("Time Series Chart " + objname)
+        self.chart.setTitle(f'Time Series Chart widget_{idx}')
         self.chart.setTheme(QtCharts.QChart.ChartThemeDark)
 
         if data is not None:
@@ -73,6 +73,4 @@ class Chart(QWidget):
 
     # todo: Update Visualizing by CAN device value
     def updateChart(self):
-        self.series.clear()
         self.layout.removeWidget(self.chart_view)
-        self.chart.removeSeries(self.series)

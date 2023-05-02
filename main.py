@@ -24,23 +24,34 @@ class MainWindow(QMainWindow):
 
         self.model = Model(_date=strftime('%Y%m%d'),
                            _data=getDataNumpy(strftime('%Y%m%d')))
-        print(getsizeof(self.model.data))
+
         self.ui_list: list = self.ui.getUiList()
         self.connectClickUi(self.ui_list, self.ui.pushButton)
 
     # UI 클릭 이벤트 처리
-    def connectClickUi(self, ui_list: list, button) -> None:
+    def connectClickUi(self, ui_list, button) -> None:
         for ui in ui_list:
-            clickable(ui).connect(partial(self.switchMain2GraphScreen, ui.objectName()))
-        clickable(button).connect(partial(self.switchGraph2MainScreen))
+            idx = np.uint8(ui.objectName().split('_')[1])
+            clickable(ui).connect(partial(self.switchMain2GraphScreen, idx))
+        clickable(button).connect(self.switchGraph2MainScreen)
 
     # 계기판 위젯 클릭 시 그래프 화면 이동
-    def switchMain2GraphScreen(self, objname: str) -> None:
-        self.ui.stackedWidget.setCurrentIndex(1)
+    def switchMain2GraphScreen(self, idx) -> None:
+        self.model.objectId = idx
+        data = self.model.data[self.model.objectId-1, : 50]
+        chart = self.ui.widget_chart
+        stack = self.ui.stackedWidget
+
+        chart.displayChart(data, self.model.objectId)
+        stack.setCurrentIndex(1)
 
     # 뒤로 가기 버튼 클릭 시 메인 화면 이동
     def switchGraph2MainScreen(self) -> None:
-        self.ui.stackedWidget.setCurrentIndex(0)
+        stack = self.ui.stackedWidget
+        chart = self.ui.widget_chart
+
+        stack.setCurrentIndex(0)
+        chart.updateChart()
 
 # 폰트 크기 고정 ( 화면 크기가 다를 시 발생 하는 문제 해결 )
 def suppress_qt_warnings():
