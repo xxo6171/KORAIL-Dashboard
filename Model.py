@@ -13,7 +13,3 @@ class Model:
     @property
     def data(self) -> np.array:
         return self._data
-
-    @data.setter
-    def data(self, value: np.array):
-        self._data = value

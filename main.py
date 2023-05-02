@@ -11,7 +11,7 @@ from PySide2.QtMultimedia import QSoundEffect
 from UI.interface_ui import Ui_MainWindow
 from Utils.LoadJson import loadJsonStyle
 from Utils.InterfaceClickable import clickable
-from Utils.DataLogging import getDataNumpyParallel
+from Utils.DataLogging import getDataNumpy
 from InterfaceThread import *
 from Model import Model
 
@@ -23,8 +23,8 @@ class MainWindow(QMainWindow):
         loadJsonStyle(self, self.ui)
 
         self.model = Model(_date=strftime('%Y%m%d'),
-                           _data=getDataNumpyParallel(strftime('%Y%m%d')))
-
+                           _data=getDataNumpy(strftime('%Y%m%d')))
+        print(getsizeof(self.model.data))
         self.ui_list: list = self.ui.getUiList()
         self.connectClickUi(self.ui_list, self.ui.pushButton)
 
