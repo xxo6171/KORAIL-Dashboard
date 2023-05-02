@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
         self.model = Model(_date=strftime('%Y%m%d'),
                            _data=getDataNumpy(strftime('%Y%m%d')))
 
-        self.ui_list: list = self.ui.getUiList()
+        self.ui_list = self.ui.getUiList()
         self.connectClickUi(self.ui_list, self.ui.pushButton)
 
     # UI 클릭 이벤트 처리
@@ -54,7 +54,7 @@ class MainWindow(QMainWindow):
         chart.updateChart()
 
 # 폰트 크기 고정 ( 화면 크기가 다를 시 발생 하는 문제 해결 )
-def suppress_qt_warnings():
+def suppress_qt_warnings() -> None:
     environ["QT_DEVICE_PIXEL_RATIO"] = "0"
     environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
     environ["QT_SCREEN_SCALE_FACTORS"] = "1"
