@@ -26,10 +26,10 @@ class MainWindow(QMainWindow):
                            _data=getDataNumpyParallel(strftime('%Y%m%d')))
 
         self.ui_list: list = self.ui.getUiList()
-        self.connectClickUiFunction(self.ui_list, self.ui.pushButton)
+        self.connectClickUi(self.ui_list, self.ui.pushButton)
 
     # UI 클릭 이벤트 처리
-    def connectClickUiFunction(self, ui_list: list, button) -> None:
+    def connectClickUi(self, ui_list: list, button) -> None:
         for ui in ui_list:
             clickable(ui).connect(partial(self.switchMain2GraphScreen, ui.objectName()))
         clickable(button).connect(partial(self.switchGraph2MainScreen))
