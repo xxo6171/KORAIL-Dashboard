@@ -9,6 +9,7 @@ class Chart(QWidget):
     def __init__(self, parent=None):
         super(Chart, self).__init__(parent)
 
+        self.chart_view = None
         # Set up the layout and add the chart view
         self.layout = QVBoxLayout()
         self.use_timer_event = False
@@ -55,10 +56,10 @@ class Chart(QWidget):
         series.attachAxis(axis_y)
 
         # Create a QChartView to display the chart
-        chart_view = QtCharts.QChartView(chart)
-        chart_view.setRenderHint(QPainter.Antialiasing)
+        self.chart_view = QtCharts.QChartView(chart)
+        self.chart_view.setRenderHint(QPainter.Antialiasing)
 
-        self.layout.addWidget(chart_view)
+        self.layout.addWidget(self.chart_view)
         self.setLayout(self.layout)
 
         if not self.use_timer_event:
