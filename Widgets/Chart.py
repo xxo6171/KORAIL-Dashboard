@@ -9,13 +9,6 @@ class Chart(QWidget):
     def __init__(self, parent=None):
         super(Chart, self).__init__(parent)
 
-        self.axis_x = None
-        self.axis_y = None
-
-        self.chart = None
-        self.series = None
-        self.chart_view = None
-
         # Set up the layout and add the chart view
         self.layout = QVBoxLayout()
         self.use_timer_event = False
@@ -28,44 +21,44 @@ class Chart(QWidget):
             self.update()
 
     def displayChart(self, data, idx):
-        self.chart = QtCharts.QChart()
-        self.series = QtCharts.QLineSeries()
+        chart = QtCharts.QChart()
+        series = QtCharts.QLineSeries()
 
-        self.chart.setTitle(f'Time Series Chart widget_{idx}')
-        self.chart.setTheme(QtCharts.QChart.ChartThemeDark)
+        chart.setTitle(f'Time Series Chart widget_{idx}')
+        chart.setTheme(QtCharts.QChart.ChartThemeDark)
 
         if data is not None:
             for val in data:
-                self.series.append(val[0], val[1])
+                series.append(val[0], val[1])
 
         # todo: Add the series to the chart
-        self.chart.addSeries(self.series)
+        chart.addSeries(series)
 
         # Create a QValueAxis for the x-axis
-        self.axis_x = QtCharts.QValueAxis()
-        self.axis_x.setRange(1, 51)
-        self.axis_x.setTickCount(11)
-        self.axis_x.setLabelFormat("%d")
+        axis_x = QtCharts.QValueAxis()
+        axis_x.setRange(1, 51)
+        axis_x.setTickCount(11)
+        axis_x.setLabelFormat("%d")
 
         # Create a QValueAxis for the y-axis
-        self.axis_y = QtCharts.QValueAxis()
-        self.axis_y.setRange(0, 200)
-        self.axis_y.setTickCount(1)
-        self.axis_y.setLabelFormat("%d")
+        axis_y = QtCharts.QValueAxis()
+        axis_y.setRange(0, 200)
+        axis_y.setTickCount(1)
+        axis_y.setLabelFormat("%d")
 
         # Add the axes to the chart
-        self.chart.addAxis(self.axis_x, Qt.AlignBottom)
-        self.chart.addAxis(self.axis_y, Qt.AlignLeft)
+        chart.addAxis(axis_x, Qt.AlignBottom)
+        chart.addAxis(axis_y, Qt.AlignLeft)
 
         # Attach the series to the axes
-        self.series.attachAxis(self.axis_x)
-        self.series.attachAxis(self.axis_y)
+        series.attachAxis(axis_x)
+        series.attachAxis(axis_y)
 
         # Create a QChartView to display the chart
-        self.chart_view = QtCharts.QChartView(self.chart)
-        self.chart_view.setRenderHint(QPainter.Antialiasing)
+        chart_view = QtCharts.QChartView(chart)
+        chart_view.setRenderHint(QPainter.Antialiasing)
 
-        self.layout.addWidget(self.chart_view)
+        self.layout.addWidget(chart_view)
         self.setLayout(self.layout)
 
         if not self.use_timer_event:
