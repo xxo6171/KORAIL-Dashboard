@@ -69,18 +69,18 @@ class MainWindow(QMainWindow):
     # todo: Executing Interface thread
     def run(self, ui_list: list, thread_list: list):
         for _thr, _ui in zip(thread_list, ui_list):
-            _thr.progress.connect(partial(self.updateInterface, _ui, None if _ui.objectName() != 'widget_4' else 'inverse'))
+            _thr.progress.connect(partial(self.updateInterface, _ui, False if _ui.objectName() != 'widget_4' else True))
 
         for _thr in thread_list:
             _thr.start()
 
     # todo: Receive from interface thread signal
     @Slot(int)
-    def updateInterface(self, obj: object, flag: str, value: int):
+    def updateInterface(self, obj: object, inv: bool, value: int):
         mobj = obj
-        mflag = flag
+        minv = inv
         mvalue = value
-        mobj.updateValue(mvalue, flag=mflag)
+        mobj.updateValue(mvalue, minv)
 
 # 폰트 크기 고정 ( 화면 크기가 다를 시 발생 하는 문제 해결 )
 def suppress_qt_warnings() -> None:
