@@ -34,10 +34,10 @@ class Thread2(QThread):
         #     self.progress.emit(i)
         #     time.sleep(0.00001)
         while True:
-            for i in range(0, 501):
+            for i in range(0, 201):
                 self.progress.emit(i)
                 self.msleep(1)
-            for i in range(500, -1, -1):
+            for i in range(200, -1, -1):
                 self.progress.emit(i)
                 self.msleep(1)
         # self.finished.emit()
