@@ -38,7 +38,7 @@
       "name": "widget_2",
       "units": "km/h",
       "minValue":"0",
-      "maxValue": "200",
+      "maxValue": "500",
       "scalaCount": "10",
       "scaleFontSize": "30",
       "valueFontSize": "40",
