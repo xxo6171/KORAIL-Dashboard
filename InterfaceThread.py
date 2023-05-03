@@ -39,13 +39,13 @@ class Thread2(QThread):
         # for i in range(200, -1, -2):
         #     self.progress.emit(i)
         #     time.sleep(0.00001)
-        # while True:
-        #     for i in range(0, 201):
-        #         self.progress.emit(i)
-        #         time.sleep(0.01)
-        #     for i in range(200, -1, -1):
-        #         self.progress.emit(i)
-        #         time.sleep(0.01)
+        while True:
+            for i in range(0, 201):
+                self.progress.emit(i)
+                time.sleep(0.01)
+            for i in range(200, -1, -1):
+                self.progress.emit(i)
+                time.sleep(0.01)
         # self.finished.emit()
 
 class Thread3(QThread):
@@ -93,19 +93,20 @@ class Thread5(QThread):
     progress = Signal(int)
 
     def run(self):
+        pass
         # for i in range(0, 101):
         #     self.progress.emit(i)
         #     time.sleep(0.001)
         # for i in range(100, -1, -1):
         #     self.progress.emit(i)
         #     time.sleep(0.001)
-        while True:
-            for i in range(0, 51):
-                self.progress.emit(i)
-                time.sleep(0.01)
-            for i in range(50, -1, -1):
-                self.progress.emit(i)
-                time.sleep(0.01)
+        # while True:
+        #     for i in range(0, 51):
+        #         self.progress.emit(i)
+        #         time.sleep(0.015)
+        #     for i in range(50, -1, -1):
+        #         self.progress.emit(i)
+        #         time.sleep(0.015)
             # i = random.randrange(0, 101)
             # time.sleep(0.5)
             # self.progress.emit(i)
