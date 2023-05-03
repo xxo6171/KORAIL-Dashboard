@@ -680,10 +680,9 @@ class AnalogGaugeWidget(QWidget):
         mmaxval = self.maxValue
         mminval = self.minValue
 
+        # swap
         if inv:
-            temp = mmaxval
-            mmaxval = mminval
-            mminval = temp
+            mmaxval, mminval = mminval, mmaxval
 
         if mnewvalue <= mminval:
             self.value = mminval
