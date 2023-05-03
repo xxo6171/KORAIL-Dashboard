@@ -30,7 +30,8 @@ class MainWindow(QMainWindow):
 
         # Create ui(interface)'s threads
         self.t1, self.t2, self.t3, self.t4, self.t5, \
-            self.t6, self.t7, self.t8, self.t9, self.t10, self.t11 = Thread1(self), Thread2(self), Thread3(self), Thread4(self), Thread5(self), \
+            self.t6, self.t7, self.t8, self.t9, self.t10, self.t11 = \
+            Thread1(self), Thread2(self), Thread3(self), Thread4(self), Thread5(self), \
             Thread6(self), Thread7(self), Thread8(self), Thread9(self), Thread10(self), Thread11(self)
 
         self.thread_list = [self.t1, self.t2, self.t3, self.t4, self.t5,
@@ -48,14 +49,15 @@ class MainWindow(QMainWindow):
     # 계기판 위젯 클릭 시 그래프 화면 이동
     def switchMain2GraphScreen(self, idx) -> None:
         objectId = idx
+        data = None
+
         if self.model.data is not None:
             data = self.model.data[objectId-1, : 50]
-        else:
-            data = None
-        chart = self.ui.widget_chart
-        stack = self.ui.stackedWidget
 
+        chart = self.ui.widget_chart
         chart.displayChart(data, objectId)
+
+        stack = self.ui.stackedWidget
         stack.setCurrentIndex(1)
 
     # 뒤로 가기 버튼 클릭 시 메인 화면 이동
