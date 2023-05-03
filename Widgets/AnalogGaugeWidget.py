@@ -1,24 +1,10 @@
-import os
-import sys
 import math
-import numpy as np
-try:
-    from PySide2.QtWidgets import QMainWindow, QWidget, QApplication
+from PySide2.QtWidgets import QMainWindow, QWidget, QApplication
+from PySide2.QtGui import QPolygon, QPolygonF, QColor, QPen, QFont, QPainter, QFontMetrics, QConicalGradient, \
+    QRadialGradient, QFontDatabase
+from PySide2.QtCore import Qt, QTime, QTimer, QPoint, QPointF, QRect, QSize, QObject, Signal
 
-    from PySide2.QtGui import QPolygon, QPolygonF, QColor, QPen, QFont, QPainter, QFontMetrics, QConicalGradient, QRadialGradient, QFontDatabase
-
-    from PySide2.QtCore import Qt, QTime, QTimer, QPoint, QPointF, QRect, QSize, QObject, Signal
-except:
-    print("Error while importing PySide2")
-    exit()
-
-# AnalogGaugeWidget CLASS
 class AnalogGaugeWidget(QWidget):
-    """Fetches rows from a Bigtable.
-    Args:
-        none
-
-    """
     valueChanged = Signal(int)
 
     def __init__(self, parent=None):
