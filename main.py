@@ -39,11 +39,11 @@ class MainWindow(QMainWindow):
         self.run(self.ui_list, self.thread_list)
 
     # UI 클릭 이벤트 처리
-    def connectClickUi(self, ui_list, button) -> None:
+    def connectClickUi(self, ui_list, btn_back) -> None:
         for ui in ui_list:
             idx = np.uint8(ui.objectName().split('_')[1])
             clickable(ui).connect(partial(self.switchMain2GraphScreen, idx))
-        clickable(button).connect(self.switchGraph2MainScreen)
+        clickable(btn_back).connect(self.switchGraph2MainScreen)
 
     # 계기판 위젯 클릭 시 그래프 화면 이동
     def switchMain2GraphScreen(self, idx) -> None:
@@ -67,20 +67,17 @@ class MainWindow(QMainWindow):
         chart.updateChart()
 
     # todo: Executing Interface thread
-    def run(self, ui_list: list, thread_list: list):
-        for _thr, _ui in zip(thread_list, ui_list):
-            _thr.progress.connect(partial(self.updateInterface, _ui, False if _ui.objectName() != 'widget_4' else True))
+    def run(self, ui_list, thread_list) -> None:
+        for thr, ui in zip(thread_list, ui_list):
+            thr.progress.connect(partial(self.updateInterface, ui, False if ui.objectName() != 'widget_4' else True))
 
-        for _thr in thread_list:
-            _thr.start()
+        for thr in thread_list:
+            thr.start()
 
     # todo: Receive from interface thread signal
     @Slot(int)
-    def updateInterface(self, obj: object, inv: bool, value: int):
-        mobj = obj
-        minv = inv
-        mvalue = value
-        mobj.updateValue(mvalue, minv)
+    def updateInterface(self, obj: object, inv: bool, value: int) -> None:
+        obj.updateValue(value, inv)
 
 # 폰트 크기 고정 ( 화면 크기가 다를 시 발생 하는 문제 해결 )
 def suppress_qt_warnings() -> None:
