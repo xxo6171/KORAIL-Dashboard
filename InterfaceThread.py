@@ -22,9 +22,6 @@ class Thread1(QThread):
         #     for i in range(80, -1, -1):
         #         self.progress.emit(i)
         #         time.sleep(0.02)
-            # i = random.randrange(0, 9)
-            # time.sleep(0.5)
-            # self.progress.emit(i)
         # self.finished.emit()
 
 class Thread2(QThread):
@@ -107,9 +104,6 @@ class Thread5(QThread):
         #     for i in range(50, -1, -1):
         #         self.progress.emit(i)
         #         time.sleep(0.015)
-            # i = random.randrange(0, 101)
-            # time.sleep(0.5)
-            # self.progress.emit(i)
         # self.finished.emit()
 
 class Thread6(QThread):
@@ -171,8 +165,6 @@ class Thread8(QThread):
         #     for i in range(100, -1, -1):
         #         self.progress.emit(i)
         #         time.sleep(0.01)
-            # i = random.randrange(0, 101)
-            # self.progress.emit(i)
         # self.finished.emit()
 
 class Thread9(QThread):
