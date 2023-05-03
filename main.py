@@ -77,7 +77,10 @@ class MainWindow(QMainWindow):
     # todo: Receive from interface thread signal
     @Slot(int)
     def updateInterface(self, obj: object, flag: str, value: int):
-        obj.updateValue(value, flag=flag)
+        mobj = obj
+        mflag = flag
+        mvalue = value
+        mobj.updateValue(mvalue, flag=mflag)
 
 # 폰트 크기 고정 ( 화면 크기가 다를 시 발생 하는 문제 해결 )
 def suppress_qt_warnings() -> None:
