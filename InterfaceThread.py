@@ -27,7 +27,6 @@ class Thread2(QThread):
     progress = Signal(int)
 
     def run(self):
-        pass
         # for i in range(0, 201, 2):
         #     self.progress.emit(i)
         #     time.sleep(0.00001)
