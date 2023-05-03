@@ -1,6 +1,4 @@
 from PySide2.QtCore import QThread, Signal
-# import random
-import time
 
 class Thread1(QThread):
     finished = Signal()
@@ -39,10 +37,10 @@ class Thread2(QThread):
         while True:
             for i in range(0, 501):
                 self.progress.emit(i)
-                time.sleep(0.01)
+                self.msleep(1)
             for i in range(500, -1, -1):
                 self.progress.emit(i)
-                time.sleep(0.01)
+                self.msleep(1)
         # self.finished.emit()
 
 class Thread3(QThread):
@@ -52,10 +50,10 @@ class Thread3(QThread):
     def run(self):
         for i in range(0, 81):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         for i in range(80, -1, -1):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         # while True:
         #     for i in range(0, 81):
         #         self.progress.emit(i)
@@ -72,10 +70,10 @@ class Thread4(QThread):
     def run(self):
         for i in range(0, 51):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         for i in range(50, -1, -1):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         # while True:
         #     for i in range(0, 51):
         #         self.progress.emit(i)
@@ -113,10 +111,10 @@ class Thread6(QThread):
     def run(self):
         for i in range(0, 51):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         for i in range(50, -1, -1):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         # while True:
         #     for i in range(0, 51):
         #         self.progress.emit(i)
@@ -154,10 +152,10 @@ class Thread8(QThread):
     def run(self):
         for i in range(0, 101):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         for i in range(100, -1, -1):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         # while True:
         #     for i in range(0, 101):
         #         self.progress.emit(i)
@@ -174,10 +172,10 @@ class Thread9(QThread):
     def run(self):
         for i in range(0, 101):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         for i in range(100, -1, -1):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         # while True:
         #     for i in range(0, 101):
         #         self.progress.emit(i)
@@ -194,10 +192,10 @@ class Thread10(QThread):
     def run(self):
         for i in range(0, 101):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         for i in range(100, -1, -1):
             self.progress.emit(i)
-            time.sleep(0.01)
+            self.msleep(1)
         # while True:
         #     for i in range(0, 101):
         #         self.progress.emit(i)
@@ -219,11 +217,11 @@ class Thread11(QThread):
         # for i in range(100, -1, -1):
         #     self.progress.emit(i)
         #     time.sleep(0.01)
-        # while True:
-        #     for i in range(0, 101):
-        #         self.progress.emit(i)
-        #         time.sleep(0.005)
-        #     for i in range(100, -1, -1):
-        #         self.progress.emit(i)
-        #         time.sleep(0.005)
+        while True:
+            for i in range(0, 101):
+                self.progress.emit(i)
+                self.msleep(1)
+            for i in range(100, -1, -1):
+                self.progress.emit(i)
+                self.msleep(1)
         # self.finished.emit()
