@@ -1,7 +1,7 @@
 import os
 import sys
 import math
-
+import numpy as np
 try:
     from PySide2.QtWidgets import QMainWindow, QWidget, QApplication
 
@@ -675,29 +675,28 @@ class AnalogGaugeWidget(QWidget):
             self.update()
 
     # UPDATE VALUE
-    def updateValue(self, value, mouse_controlled=False, flag=None):
+    def updateValue(self, value, inv=False):
+        mnewvalue = value
+        mmaxval = self.maxValue
+        mminval = self.minValue
 
-        if flag == 'inverse':
-            if value <= self.maxValue:
-                self.value = self.maxValue
-            elif value >= self.minValue:
-                self.value = self.minValue
-            else:
-                self.value = value
+        if inv:
+            temp = mmaxval
+            mmaxval = mminval
+            mminval = temp
 
-        if flag is None:
-            if value <= self.minValue:
-                self.value = self.minValue
-            elif value >= self.maxValue:
-                self.value = self.maxValue
-            else:
-                self.value = value
+        if mnewvalue <= mminval:
+            self.value = mminval
+        elif mnewvalue >= mmaxval:
+            self.value = mmaxval
+        else:
+            self.value = mnewvalue
         # self.paintEvent("")
-        self.valueChanged.emit(int(value))
+        self.valueChanged.emit(self.value)
         # print(self.value)
 
         if not self.use_timer_event:
-            self.timer.start(10000)
+            self.timer.start(100000)
             self.update()
 
     def updateAngleOffset(self, offset):
