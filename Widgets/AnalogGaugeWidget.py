@@ -1168,8 +1168,8 @@ class AnalogGaugeWidget(QWidget):
         if self.enable_CenterPoint:
             self.draw_big_needle_center_point(diameter=int(self.widget_diameter / 6))
 
-if __name__ == '__main__':
-    app = QApplication([])
-    window = AnalogGaugeWidget()
-    window.show()
-    app.exec_()
+# if __name__ == '__main__':
+#     app = QApplication([])
+#     window = AnalogGaugeWidget()
+#     window.show()
+#     app.exec_()
