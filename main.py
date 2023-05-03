@@ -47,15 +47,15 @@ class MainWindow(QMainWindow):
 
     # 계기판 위젯 클릭 시 그래프 화면 이동
     def switchMain2GraphScreen(self, idx) -> None:
-        self.model.objectId = idx
+        objectId = idx
         if self.model.data is not None:
-            data = self.model.data[self.model.objectId-1, : 50]
+            data = self.model.data[objectId-1, : 50]
         else:
             data = None
         chart = self.ui.widget_chart
         stack = self.ui.stackedWidget
 
-        chart.displayChart(data, self.model.objectId)
+        chart.displayChart(data, objectId)
         stack.setCurrentIndex(1)
 
     # 뒤로 가기 버튼 클릭 시 메인 화면 이동
