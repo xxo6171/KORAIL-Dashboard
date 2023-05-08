@@ -348,12 +348,22 @@ font: 14pt &quot;Consolas&quot;;</string>
      </widget>
     </widget>
     <widget class="QWidget" name="page_4">
+     <widget class="Chart" name="widget_chart" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>70</y>
+        <width>1040</width>
+        <height>651</height>
+       </rect>
+      </property>
+     </widget>
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
-        <width>121</width>
+        <y>10</y>
+        <width>80</width>
         <height>41</height>
        </rect>
       </property>
@@ -363,17 +373,27 @@ font: 14pt &quot;Arial&quot;;
 background-color: rgb(255, 0, 0);</string>
       </property>
       <property name="text">
-       <string>Back</string>
+       <string>BACK</string>
       </property>
      </widget>
-     <widget class="Chart" name="widget_chart" native="true">
+     <widget class="QLabel" name="label_date">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>90</y>
-        <width>951</width>
-        <height>601</height>
+        <x>810</x>
+        <y>30</y>
+        <width>221</width>
+        <height>31</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white;
+font: 24pt Malgon Gothic;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </widget>

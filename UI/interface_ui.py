@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'interfaceAbqnGs.ui'
+## Form generated from reading UI file 'interfaceMzjYBo.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
-
+from time import strftime
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
@@ -140,15 +140,21 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_3)
         self.page_4 = QWidget()
         self.page_4.setObjectName(u"page_4")
+        self.widget_chart = Chart(self.page_4)
+        self.widget_chart.setObjectName(u"widget_chart")
+        self.widget_chart.setGeometry(QRect(0, 70, 1040, 651))
         self.pushButton = QPushButton(self.page_4)
         self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(10, 20, 121, 41))
+        self.pushButton.setGeometry(QRect(10, 10, 80, 41))
         self.pushButton.setStyleSheet(u"background-color: rgb(85, 255, 127);\n"
 "font: 14pt \"Arial\";\n"
 "background-color: rgb(255, 0, 0);")
-        self.widget_chart = Chart(self.page_4)
-        self.widget_chart.setObjectName(u"widget_chart")
-        self.widget_chart.setGeometry(QRect(50, 90, 951, 601))
+        self.label_date = QLabel(self.page_4)
+        self.label_date.setObjectName(u"label_date")
+        self.label_date.setGeometry(QRect(810, 30, 221, 31))
+        self.label_date.setStyleSheet(u"color: white;\n"
+"font: 24pt Malgon Gothic;")
+        self.label_date.setAlignment(Qt.AlignCenter)
         self.stackedWidget.addWidget(self.page_4)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -158,10 +164,12 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
+        from time import strftime
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label.setText("")
         self.label_loading.setText(QCoreApplication.translate("MainWindow", u"LOADING...", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Back", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"BACK", None))
+        self.label_date.setText(QCoreApplication.translate("MainWindow", strftime(u"%Y.%m.%d"), None))
     # retranslateUi
 
     def getUiList(self):
