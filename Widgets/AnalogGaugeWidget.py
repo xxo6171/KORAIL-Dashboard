@@ -91,6 +91,9 @@ class AnalogGaugeWidget(QWidget):
         
         # FILL POLYGON COLOR BY DEFAULT
         self.setEnableScalePolygon(True)
+
+        # ENABLE OUTER CIRCLE BY DEFAULT
+        self.enable_outer_circle = True
         
         # ENABLE CENTER POINTER BY DEFAULT
         self.enable_CenterPoint = True
@@ -671,6 +674,12 @@ class AnalogGaugeWidget(QWidget):
     def center_vertical(self, value):
         self.center_vertical_value = value
 
+    def setEnableOuterCircle(self, enable=True):
+        self.enable_outer_circle = enable
+
+        if not self.use_timer_event:
+            self.update()
+
     # SET NEEDLE COLOR
     def setNeedleColor(self, R=50, G=50, B=50, Transparency=255):
         self.NeedleColor = QColor(R, G, B, Transparency)
@@ -1078,7 +1087,7 @@ class AnalogGaugeWidget(QWidget):
         painter.drawPolygon(colored_scale_polygon)
         # return painter_filled_polygon
 
-    def drawOuter(self):
+    def draw_outer_circle(self):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
 
@@ -1096,7 +1105,7 @@ class AnalogGaugeWidget(QWidget):
         painter.drawPolygon(points)  # 원 그리기
 
     # CREATE OUTER COVER
-    def draw_outer_circle(self, diameter=30):
+    def draw_circle(self, diameter=30):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
 
@@ -1138,8 +1147,10 @@ class AnalogGaugeWidget(QWidget):
     # ON PAINT EVENT
     def paintEvent(self, event):
 
-        self.draw_outer_circle()
-        self.drawOuter()
+        self.draw_circle()
+
+        if self.enable_outer_circle:
+            self.draw_outer_circle()
 
         # colored pie area
         if self.enable_filled_Polygon:

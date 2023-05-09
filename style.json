@@ -106,9 +106,10 @@
       "displayValueColor": "white",
       "scaleStartAngle": "270",
       "totalScaleAngle": "90",
+      "enableOuterCircle": false,
       "enableCenterPoint": false,
       "enableScaleText": false,
-      "needleLength": "0.7",
+      "needleLength": "0.6",
       "needleColor": "red",
       "valueFontFamily": [
         {
@@ -169,8 +170,9 @@
       "displayValueColor": "white",
       "scaleStartAngle": "540",
       "totalScaleAngle": "90",
+      "enableOuterCircle": false,
       "enableCenterPoint": false,
-      "needleLength": "0.7",
+      "needleLength": "0.6",
       "needleColor": "red",
       "valueFontFamily": [
         {
@@ -200,6 +202,7 @@
       "valueFontSize": "50",
       "scaleStartAngle": "180",
       "totalScaleAngle": "180",
+      "enableOuterCircle": false,
       "enableCenterPoint": false,
       "needleLength": "0.5",
       "needleColor": "red",

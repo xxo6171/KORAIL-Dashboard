@@ -77,6 +77,10 @@ def applyJsonStyle(self, ui, data):
                         # Set total scale angle
                         gaugeWidget.setTotalScaleAngleSize(int(AnalogGaugeWidget["totalScaleAngle"]))
 
+                    if "enableOuterCircle" in AnalogGaugeWidget:
+                        # Set enable outer circle
+                        gaugeWidget.setEnableOuterCircle(bool(AnalogGaugeWidget["enableOuterCircle"]))
+
                     if "enableBarGraph" in AnalogGaugeWidget:
                         # Set enable bar graph
                         gaugeWidget.setEnableBarGraph(bool(AnalogGaugeWidget["enableBarGraph"]))
