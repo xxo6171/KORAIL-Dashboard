@@ -8,11 +8,13 @@ from PySide2.QtGui import QPainter, QBrush, QFont, QPen
 class Chart(QWidget):
     def __init__(self, parent=None):
         super(Chart, self).__init__(parent)
-        self.chart_view = None
-        # Set up the layout and add the chart view
-        self.layout = QVBoxLayout()
         self.use_timer_event = False
         self.timer = QTimer(self)
+
+        self.chart_view = None
+        self.chart = None
+        self.series = None
+        self.layout = None
 
         self.font = QFont('NanumSquare')
 
@@ -31,30 +33,31 @@ class Chart(QWidget):
             self.update()
 
     def displayChart(self, data, idx):
-        chart = QtCharts.QChart()
-        chart.setTheme(QtCharts.QChart.ChartThemeDark)
-        chart.setBackgroundBrush(QBrush(Qt.black))
-        chart.legend().setVisible(False)
+        self.layout = QVBoxLayout()
 
-        # chart.setAnimationOptions(QtCharts.QChart.AllAnimations)
-        # # InQuint와 반대로 시작 시간이 길고 끝나는 시간이 짧은 뾰족한 애니메이션 (5차 함수)
-        # chart.setAnimationEasingCurve(QEasingCurve.OutQuint)
+        self.chart = QtCharts.QChart()
+        self.chart.setTheme(QtCharts.QChart.ChartThemeDark)
+        self.chart.setBackgroundBrush(QBrush(Qt.black))
+        self.chart.legend().setVisible(False)
+        self.chart.setAnimationOptions(QtCharts.QChart.AllAnimations)
+        # InQuint와 반대로 시작 시간이 길고 끝나는 시간이 짧은 뾰족한 애니메이션 (5차 함수)
+        self.chart.setAnimationEasingCurve(QEasingCurve.OutQuint)
 
         title = self.deviceType[idx-1][0]
         unit = self.deviceType[idx-1][1]
 
-        chart.setTitle(title)
-        title_font = chart.titleFont()
+        self.chart.setTitle(title)
+        title_font = self.chart.titleFont()
         title_font.setFamily(self.font.family())
         title_font.setPointSize(30)
-        chart.setTitleFont(title_font)
+        self.chart.setTitleFont(title_font)
 
-        series = QtCharts.QLineSeries()
-        series.setPen(QPen(Qt.green, 2))
-        # if data is not None:
-        for val in data:
-            series.append(val[0], val[1])
-        chart.addSeries(series)
+        self.series = QtCharts.QLineSeries()
+        self.series.setPen(QPen(Qt.green, 2))
+        if data is not None:
+            for val in data:
+                self.series.append(val[0], val[1])
+        self.chart.addSeries(self.series)
 
         # Create a QValueAxis for the x-axis
         axis_x = QtCharts.QValueAxis()
@@ -69,12 +72,12 @@ class Chart(QWidget):
         axis_y.setLabelFormat("%d")
 
         # Add the axes to the chart
-        chart.addAxis(axis_x, Qt.AlignBottom)
-        chart.addAxis(axis_y, Qt.AlignLeft)
-        chart.axisX().setGridLineVisible(False)
-        chart.axisY().setLineVisible(False)
+        self.chart.addAxis(axis_x, Qt.AlignBottom)
+        self.chart.addAxis(axis_y, Qt.AlignLeft)
+        self.chart.axisX().setGridLineVisible(False)
+        self.chart.axisY().setLineVisible(False)
 
-        for i, axis in enumerate([chart.axisX(), chart.axisY()]):
+        for i, axis in enumerate([self.chart.axisX(), self.chart.axisY()]):
             axis_font = axis.labelsFont()
             axis_font.setFamily(self.font.family())
             axis_font.setPointSize(20)
@@ -83,11 +86,11 @@ class Chart(QWidget):
             axis.setTitleText("시간" if i == 0 else unit)
 
         # Attach the series to the axes
-        series.attachAxis(axis_x)
-        series.attachAxis(axis_y)
+        self.series.attachAxis(axis_x)
+        self.series.attachAxis(axis_y)
 
         # Create a QChartView to display the chart
-        self.chart_view = QtCharts.QChartView(chart)
+        self.chart_view = QtCharts.QChartView(self.chart)
         self.chart_view.setRenderHint(QPainter.Antialiasing)
 
         self.layout.addWidget(self.chart_view)
@@ -96,6 +99,9 @@ class Chart(QWidget):
         if not self.use_timer_event:
             self.update()
 
-    # todo: Update Visualizing by CAN device value
-    def updateChart(self):
-        self.layout.removeWidget(self.chart_view)
+    # 메모리 해제
+    def removeChart(self):
+        # 메모리 해제
+        self.chart.deleteLater()
+        self.chart_view.deleteLater()
+        self.layout.deleteLater()
