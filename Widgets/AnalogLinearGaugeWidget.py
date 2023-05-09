@@ -26,7 +26,7 @@ class AnalogLinearGaugeWidget(QWidget):
                              QPoint(self.needle_x + 10, self.needle_y + 10)]
         # Set the Font Family
         self.fontDB = QFontDatabase()
-        self.font_id = self.fontDB.addApplicationFont('Fonts/HD_HARMONY_L.TTF')
+        self.font_id = self.fontDB.addApplicationFont('Fonts/HD_HARMONY_B.TTF')
         self.font_family = self.fontDB.applicationFontFamilies(self.font_id)[0]
 
         # Set the UI repaint event
