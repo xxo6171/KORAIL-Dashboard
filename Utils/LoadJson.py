@@ -49,6 +49,10 @@ def applyJsonStyle(self, ui, data):
                         # Set scala count
                         gaugeWidget.scalaCount = int(AnalogGaugeWidget["scalaCount"])
 
+                    if "scalaSubDivCount" in AnalogGaugeWidget:
+                        # Set scala count
+                        gaugeWidget.scala_subdiv_count = int(AnalogGaugeWidget["scalaSubDivCount"])
+
                     if "startValue" in AnalogGaugeWidget:
                         # Set start value
                         gaugeWidget.updateValue(int(AnalogGaugeWidget["startValue"]))
@@ -80,6 +84,10 @@ def applyJsonStyle(self, ui, data):
                     if "enableOuterCircle" in AnalogGaugeWidget:
                         # Set enable outer circle
                         gaugeWidget.setEnableOuterCircle(bool(AnalogGaugeWidget["enableOuterCircle"]))
+
+                    if "enableOuterHalfCircle" in AnalogGaugeWidget:
+
+                        gaugeWidget.setEnableOuterHalfCircle(bool(AnalogGaugeWidget["enableOuterHalfCircle"]))
 
                     if "enableBarGraph" in AnalogGaugeWidget:
                         # Set enable bar graph

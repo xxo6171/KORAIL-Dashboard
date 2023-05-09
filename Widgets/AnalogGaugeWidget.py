@@ -94,6 +94,8 @@ class AnalogGaugeWidget(QWidget):
 
         # ENABLE OUTER CIRCLE BY DEFAULT
         self.enable_outer_circle = True
+
+        self.enable_outer_half_circle = False
         
         # ENABLE CENTER POINTER BY DEFAULT
         self.enable_CenterPoint = True
@@ -620,8 +622,8 @@ class AnalogGaugeWidget(QWidget):
         self.change_value_needle_style([QPolygon([
             # QPoint(4, 30),
             # QPoint(-4, 30),
-            QPoint(4, 20),
-            QPoint(-4, 20),
+            QPoint(4, 28),
+            QPoint(-4, 28),
             QPoint(-2, int(- self.widget_diameter / 2 * self.needle_scale_factor)),
             QPoint(0, int(- self.widget_diameter /
                    2 * self.needle_scale_factor - 6)),
@@ -676,6 +678,12 @@ class AnalogGaugeWidget(QWidget):
 
     def setEnableOuterCircle(self, enable=True):
         self.enable_outer_circle = enable
+
+        if not self.use_timer_event:
+            self.update()
+
+    def setEnableOuterHalfCircle(self, enable=False):
+        self.enable_outer_half_circle = enable
 
         if not self.use_timer_event:
             self.update()
@@ -772,7 +780,7 @@ class AnalogGaugeWidget(QWidget):
         if not self.use_timer_event:
             self.update()
 
-    # SHOW HIDE SCALA MAIN CONT
+    # SHOW HIDE SCALA MAIN COUNT
     def setScalaCount(self, count):
         if count < 1:
             count = 1
@@ -923,7 +931,7 @@ class AnalogGaugeWidget(QWidget):
         my_painter.translate(self.width() / 2, self.height() / 2)
 
         self.pen = QPen(self.bigScaleMarker)
-        self.pen.setWidth(3)
+        self.pen.setWidth(2)
 
         my_painter.setPen(self.pen)
 
@@ -982,7 +990,7 @@ class AnalogGaugeWidget(QWidget):
 
         my_painter.translate(self.width() / 2, self.height() / 2)
 
-        my_painter.setPen(self.fineScaleColor)
+        my_painter.setPen(QPen(self.fineScaleColor, 1))
         my_painter.rotate(self.scale_angle_start_value - self.angle_offset)
         steps_size = (float(self.scale_angle_size) /
                       float(self.scalaCount * self.scala_subdiv_count))
@@ -1092,12 +1100,20 @@ class AnalogGaugeWidget(QWidget):
         painter.setRenderHint(QPainter.Antialiasing)
 
         painter.translate(self.width() / 2, self.height() / 2)
-        painter.setPen(QPen(Qt.white, 3))
+        painter.setPen(QPen(Qt.white, 1))
 
         points = QPolygonF()
-        outer = (self.widget_diameter / 2) - (self.pen.width()) + 10
+        outer = (self.widget_diameter / 2) - (self.pen.width()) + 3
+
+        start = 0
+        end = 360
+
+        if self.enable_outer_half_circle:
+            start = 135
+            end = 406
+
         # for i in range(0, 360):
-        for i in range(135, 406):
+        for i in range(start, end):
             x = outer * math.cos(math.radians(i))
             y = outer * math.sin(math.radians(i))
             points.append(QPointF(x, y))
@@ -1149,8 +1165,7 @@ class AnalogGaugeWidget(QWidget):
 
         self.draw_circle()
 
-        if self.enable_outer_circle:
-            self.draw_outer_circle()
+
 
         # colored pie area
         if self.enable_filled_Polygon:
@@ -1178,6 +1193,9 @@ class AnalogGaugeWidget(QWidget):
         # Draw Center Point
         if self.enable_CenterPoint:
             self.draw_big_needle_center_point(diameter=int(self.widget_diameter / 6))
+
+        if self.enable_outer_circle:
+            self.draw_outer_circle()
 
 # if __name__ == '__main__':
 #     app = QApplication([])

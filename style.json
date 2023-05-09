@@ -2,10 +2,11 @@
   "AnalogGaugeWidget": [
     {
       "name": "widget_1",
-      "units": "RPM",
+      "units": "x1000rpm",
       "minValue":"0",
-      "maxValue": "80",
+      "maxValue": "8",
       "scalaCount": "8",
+      "scalaSubDivCount": "10",
       "scaleFontSize": "25",
       "valueFontSize": "50",
       "scaleValueColor": "white",
@@ -31,30 +32,32 @@
 			"color1": "green",
             "color2": "red"
 		}],
-      "bigScaleColor" : "black",
-      "fineScaleColor" : "black"
+      "bigScaleColor" : "white",
+      "fineScaleColor" : "white"
     },
     {
       "name": "widget_2",
-      "units": "KM/H",
+      "units": "km/h",
       "minValue":"0",
-      "maxValue": "200",
-      "scalaCount": "10",
+      "maxValue": "260",
+      "scalaCount": "13",
+      "scalaSubDivCount": "3",
       "scaleFontSize": "22",
       "valueFontSize": "45",
       "scaleValueColor": "white",
       "displayValueColor": "white",
       "needleColor": "red",
+      "enableOuterHalfCircle": true,
       "valueFontFamily": [
         {
-          "path": "Fonts/HD_HARMONY_B.TTF",
-          "name": "HDharmony B"
+          "path": "Fonts/HD_HARMONY_M.TTF",
+          "name": "HDharmony M"
         }
       ],
       "scaleFontFamily": [
         {
-          "path": "Fonts/HD_HARMONY_B.TTF",
-          "name": "HDharmony B"
+          "path": "Fonts/HD_HARMONY_M.TTF",
+          "name": "HDharmony M"
         }
       ],
       "outerCircleColor": [{
@@ -66,7 +69,7 @@
     },
     {
       "name": "widget_3",
-      "units": "BAR",
+      "units": "bar",
       "minValue":"0",
       "maxValue": "80",
       "scalaCount": "8",
@@ -134,21 +137,23 @@
       "minValue": "0",
       "maxValue": "100",
       "scalaCount": "10",
+      "scalaSubDivCount": "2",
       "scaleFontSize": "25",
       "valueFontSize": "50",
       "scaleValueColor": "white",
       "displayValueColor": "white",
       "needleColor": "red",
+      "enableOuterHalfCircle": true,
       "valueFontFamily": [
         {
-          "path": "Fonts/HD_HARMONY_B.TTF",
-          "name": "HDharmony B"
+          "path": "Fonts/HD_HARMONY_M.TTF",
+          "name": "HDharmony M"
         }
       ],
       "scaleFontFamily": [
         {
-          "path": "Fonts/HD_HARMONY_B.TTF",
-          "name": "HDharmony B"
+          "path": "Fonts/HD_HARMONY_M.TTF",
+          "name": "HDharmony M"
         }
       ],
       "outerCircleColor": [{
@@ -156,7 +161,7 @@
       }],
       "enableScalePolygon": false,
       "bigScaleColor" : "white",
-      "fineScaleColor" : "gray"
+      "fineScaleColor" : "white"
     },
     {
       "name": "widget_6",

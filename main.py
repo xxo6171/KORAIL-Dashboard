@@ -5,6 +5,7 @@ from os import environ
 
 from functools import partial
 from PySide2.QtCore import Slot, QUrl, QTimer
+from PySide2.QtGui import Qt
 from PySide2.QtWidgets import QMainWindow, QApplication
 from PySide2.QtMultimedia import QSoundEffect
 
@@ -28,7 +29,7 @@ class MainWindow(QMainWindow):
         self.ui_list = self.ui.getUiList()
         self.connectClickUi(self.ui_list, self.ui.pushButton)
 
-        self.thread_list = Threads().getThreads()
+        self.thread_list = Threads().getThreadList()
         self.run(self.ui_list, self.thread_list)
 
     # UI 클릭 이벤트 처리
@@ -73,6 +74,10 @@ class MainWindow(QMainWindow):
     def updateInterface(self, obj: object, inv: bool, value: int) -> None:
         obj.updateValue(value, inv)
 
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Escape:
+            self.close()
+
 # 폰트 크기 고정 ( 화면 크기가 다를 시 발생 하는 문제 해결 )
 def suppress_qt_warnings() -> None:
     environ["QT_DEVICE_PIXEL_RATIO"] = "0"
@@ -84,6 +89,10 @@ if __name__ == '__main__':
     suppress_qt_warnings()
     app = QApplication(argv)
     window = MainWindow()
+    # window.setFixedSize(1680, 1050)
+    # window.showFullScreen()
     window.setFixedSize(1040, 728)
     window.show()
+
+    app.setQuitOnLastWindowClosed(True)
     exit(app.exec_())
