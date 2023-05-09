@@ -16,7 +16,7 @@ class Chart(QWidget):
         self.series = None
         self.layout = None
 
-        self.font = QFont('NanumSquare')
+        self.font = QFont('HDharmony B')
 
         self.deviceType = [('차량 속도', 'KM'),
                            ('기관 회전 값', 'RPM'), ('기관 온도', 'ºC'),

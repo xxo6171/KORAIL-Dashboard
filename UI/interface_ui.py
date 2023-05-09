@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'interfaceMzjYBo.ui'
+## Form generated from reading UI file 'interfaceOzGldj.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
-from time import strftime
+
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
@@ -153,7 +153,7 @@ class Ui_MainWindow(object):
         self.label_date.setObjectName(u"label_date")
         self.label_date.setGeometry(QRect(810, 30, 221, 31))
         self.label_date.setStyleSheet(u"color: white;\n"
-"font: 24pt Malgon Gothic;")
+"font: 24pt HDharmony B;")
         self.label_date.setAlignment(Qt.AlignCenter)
         self.stackedWidget.addWidget(self.page_4)
         MainWindow.setCentralWidget(self.centralwidget)
