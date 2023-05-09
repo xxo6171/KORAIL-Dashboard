@@ -914,7 +914,7 @@ class AnalogGaugeWidget(QWidget):
         my_painter.translate(self.width() / 2, self.height() / 2)
 
         self.pen = QPen(self.bigScaleMarker)
-        self.pen.setWidth(2)
+        self.pen.setWidth(3)
 
         my_painter.setPen(self.pen)
 
@@ -1083,7 +1083,7 @@ class AnalogGaugeWidget(QWidget):
         painter.setRenderHint(QPainter.Antialiasing)
 
         painter.translate(self.width() / 2, self.height() / 2)
-        painter.setPen(QPen(Qt.white, 2))
+        painter.setPen(QPen(Qt.white, 3))
 
         points = QPolygonF()
         outer = (self.widget_diameter / 2) - (self.pen.width()) + 10

@@ -105,13 +105,13 @@ class Thread5(QThread):
         # for i in range(100, -1, -1):
         #     self.progress.emit(i)
         #     time.sleep(0.001)
-        # while True:
-        #     for i in range(0, 51):
-        #         self.progress.emit(i)
-        #         time.sleep(0.015)
-        #     for i in range(50, -1, -1):
-        #         self.progress.emit(i)
-        #         time.sleep(0.015)
+        while True:
+            for i in range(0, 101):
+                self.progress.emit(i)
+                self.msleep(20)
+            for i in range(100, -1, -1):
+                self.progress.emit(i)
+                self.msleep(20)
         # self.finished.emit()
 
 class Thread6(QThread):

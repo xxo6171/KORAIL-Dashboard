@@ -154,8 +154,8 @@
             "color1": "black"
       }],
       "enableScalePolygon": false,
-      "bigScaleColor" : "red",
-      "fineScaleColor" : "white"
+      "bigScaleColor" : "white",
+      "fineScaleColor" : "gray"
     },
     {
       "name": "widget_6",
