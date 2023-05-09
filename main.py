@@ -27,7 +27,6 @@ class MainWindow(QMainWindow):
 
         self.ui_list = self.ui.getUiList()
         self.connectClickUi(self.ui_list, self.ui.pushButton)
-        self.current_page_index = 0
 
         # Create ui(interface)'s threads
         self.t1, self.t2, self.t3, self.t4, self.t5, \
@@ -49,27 +48,26 @@ class MainWindow(QMainWindow):
 
     # 계기판 위젯 클릭 시 그래프 화면 이동
     def switchMain2GraphScreen(self, idx) -> None:
-        objectId = idx
         data = None
+        object_id = idx
 
         if self.model.data is not None:
-            data = self.model.data[objectId-1, : 50]
+            data = self.model.data[object_id-1, : 50]
 
         chart = self.ui.widget_chart
-        chart.displayChart(data, objectId)
+
+        chart.displayChart(data, object_id)
 
         stack = self.ui.stackedWidget
-        self.current_page_index = 1
-        stack.setCurrentIndex(self.current_page_index)
+        stack.setCurrentIndex(1)
 
     # 뒤로 가기 버튼 클릭 시 메인 화면 이동
     def switchGraph2MainScreen(self) -> None:
         chart = self.ui.widget_chart
-        chart.updateChart()
+        chart.removeChart()
 
         stack = self.ui.stackedWidget
-        self.current_page_index = 0
-        stack.setCurrentIndex(self.current_page_index)
+        stack.setCurrentIndex(0)
 
     # todo: Executing Interface thread
     def run(self, ui_list, thread_list) -> None:
