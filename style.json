@@ -2,11 +2,11 @@
   "AnalogGaugeWidget": [
     {
       "name": "widget_1",
-      "units": "rpm",
+      "units": "RPM",
       "minValue":"0",
       "maxValue": "80",
       "scalaCount": "8",
-      "scaleFontSize": "30",
+      "scaleFontSize": "25",
       "valueFontSize": "50",
       "scaleValueColor": "white",
       "displayValueColor": "white",
@@ -14,14 +14,14 @@
       "needleColor": "red",
       "valueFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "scaleFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "outerCircleColor": [{
@@ -36,25 +36,25 @@
     },
     {
       "name": "widget_2",
-      "units": "km/h",
+      "units": "KM/H",
       "minValue":"0",
       "maxValue": "200",
       "scalaCount": "10",
-      "scaleFontSize": "30",
-      "valueFontSize": "40",
+      "scaleFontSize": "22",
+      "valueFontSize": "45",
       "scaleValueColor": "white",
       "displayValueColor": "white",
       "needleColor": "red",
       "valueFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "scaleFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "outerCircleColor": [{
@@ -70,21 +70,21 @@
       "minValue":"0",
       "maxValue": "80",
       "scalaCount": "8",
-      "scaleFontSize": "30",
+      "scaleFontSize": "25",
       "valueFontSize": "50",
       "scaleValueColor": "white",
       "displayValueColor": "white",
       "needleColor": "red",
       "valueFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "scaleFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "outerCircleColor": [{
@@ -112,14 +112,14 @@
       "needleColor": "red",
       "valueFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "scaleFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "outerCircleColor": [{
@@ -133,21 +133,21 @@
       "minValue": "0",
       "maxValue": "100",
       "scalaCount": "10",
-      "scaleFontSize": "30",
+      "scaleFontSize": "25",
       "valueFontSize": "50",
       "scaleValueColor": "white",
       "displayValueColor": "white",
       "needleColor": "red",
       "valueFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "scaleFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "outerCircleColor": [{
@@ -174,14 +174,14 @@
       "needleColor": "red",
       "valueFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "scaleFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "outerCircleColor": [{
@@ -196,7 +196,7 @@
       "scalaCount": "1",
       "scaleValueColor": "white",
       "displayValueColor": "white",
-      "scaleFontSize": "40",
+      "scaleFontSize": "35",
       "valueFontSize": "50",
       "scaleStartAngle": "180",
       "totalScaleAngle": "180",
@@ -207,14 +207,14 @@
       "innerRadius": "900",
       "valueFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "scaleFontFamily": [
         {
-          "path": "Fonts/DS-DIGIB.TTF",
-          "name": "DS-Digital"
+          "path": "Fonts/HD_HARMONY_L.TTF",
+          "name": "HDharmony"
         }
       ],
       "outerCircleColor": [{

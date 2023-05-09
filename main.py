@@ -29,7 +29,7 @@ class MainWindow(QMainWindow):
         self.connectClickUi(self.ui_list, self.ui.pushButton)
 
         self.thread_list = Threads().getThreads()
-        self.run(self.ui_list, self.thread_list)
+        # self.run(self.ui_list, self.thread_list)
 
     # UI 클릭 이벤트 처리
     def connectClickUi(self, ui_list, btn_back) -> None:
@@ -47,7 +47,6 @@ class MainWindow(QMainWindow):
             data = self.model.data[object_id-1, : 50]
 
         chart = self.ui.widget_chart
-
         chart.displayChart(data, object_id)
 
         stack = self.ui.stackedWidget

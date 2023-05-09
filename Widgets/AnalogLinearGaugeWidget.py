@@ -14,7 +14,7 @@ class AnalogLinearGaugeWidget(QWidget):
         self.x, self.y = 10, 30
         self.width, self.height = 300, 10
 
-        self.units = "Units"
+        self.units = "UNITS"
         self.minValue = 0
         self.maxValue = 100
         self.value = self.minValue
@@ -26,7 +26,7 @@ class AnalogLinearGaugeWidget(QWidget):
                              QPoint(self.needle_x + 10, self.needle_y + 10)]
         # Set the Font Family
         self.fontDB = QFontDatabase()
-        self.font_id = self.fontDB.addApplicationFont('Fonts/DS-DIGIB.TTF')
+        self.font_id = self.fontDB.addApplicationFont('Fonts/HD_HARMONY_L.TTF')
         self.font_family = self.fontDB.applicationFontFamilies(self.font_id)[0]
 
         # Set the UI repaint event
@@ -68,7 +68,7 @@ class AnalogLinearGaugeWidget(QWidget):
     # Drawing the units text
     def drawUnitsText(self, qp):
         qp.setPen(QPen(Qt.white, 1, Qt.SolidLine))
-        qp.setFont(QFont("Courier New", 13))
+        qp.setFont(QFont(self.font_family, 13))
         qp.drawText(self.x, self.height+10, self.units)
 
     # Drawing the value text
