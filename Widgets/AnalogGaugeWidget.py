@@ -109,6 +109,9 @@ class AnalogGaugeWidget(QWidget):
         # ENABLE BIG SCALE BY DEFAULT
         self.enable_big_scaled_marker = True
 
+        # ENABLE INNER VALUE TEXT BY DEFAULT
+        self.enable_inner_value_text = True
+
         # NEEDLE SCALE FACTOR/LENGTH
         self.needle_scale_factor = 0.8
         
@@ -617,9 +620,9 @@ class AnalogGaugeWidget(QWidget):
     def rescale_method(self):
         # SET WIDTH AND HEIGHT
         if self.width() <= self.height():
-            self.widget_diameter = self.width() - 20
+            self.widget_diameter = self.width() - 45
         else:
-            self.widget_diameter = self.height() - 20
+            self.widget_diameter = self.height() - 45
 
         # SET NEEDLE SIZE
         self.change_value_needle_style([QPolygon([
@@ -779,6 +782,13 @@ class AnalogGaugeWidget(QWidget):
     # SHOW HIDE FINE SCALE
     def setEnableFineScaleGrid(self, enable=True):
         self.enable_fine_scaled_marker = enable
+
+        if not self.use_timer_event:
+            self.update()
+
+    # SHOW INNER VALUE TEXT
+    def setEnableInnerValueText(self, enable=True):
+        self.enable_inner_value_text = enable
 
         if not self.use_timer_event:
             self.update()
@@ -952,6 +962,8 @@ class AnalogGaugeWidget(QWidget):
                                 (self.widget_diameter / 20) + 2)
 
         for i in range(self.scalaCount + 1):
+            # if i >= 10:
+            #     my_painter.setPen(QPen(Qt.red, 2))
             my_painter.drawLine(scale_line_length, 0,
                                 scale_line_outer_start, 0)
             my_painter.rotate(steps_size)
@@ -972,6 +984,10 @@ class AnalogGaugeWidget(QWidget):
         painter.setPen(pen_shadow)
 
         text_radius_factor = 0.8
+
+        if not self.enable_inner_value_text:
+            text_radius_factor = 1.2
+
         text_radius = self.widget_diameter / 2 * text_radius_factor
 
         scale_per_div = int((self.maxValue - self.minValue) / self.scalaCount)

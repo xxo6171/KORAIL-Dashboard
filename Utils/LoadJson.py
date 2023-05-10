@@ -101,6 +101,10 @@ def applyJsonStyle(self, ui, data):
                         # Set enable text value
                         gaugeWidget.setEnableValueText(bool(AnalogGaugeWidget["enableValueText"]))
 
+                    if "enableInnerValueText" in AnalogGaugeWidget:
+                        # Enable inner value text
+                        gaugeWidget.setEnableInnerValueText(bool(AnalogGaugeWidget["enableInnerValueText"]))
+
                     if "enableNeedlePolygon" in AnalogGaugeWidget:
                         # Set enable needle polygon
                         gaugeWidget.setEnableNeedlePolygon(bool(AnalogGaugeWidget["enableNeedlePolygon"]))
