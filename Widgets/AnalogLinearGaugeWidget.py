@@ -23,8 +23,8 @@ class AnalogLinearGaugeWidget(QWidget):
         self.needle_x = 10
         self.needle_y = self.y + self.height() - 18
         self.needle_point = [QPoint(self.needle_x, self.needle_y),
-                             QPoint(self.needle_x - 10, self.needle_y + 10),
-                             QPoint(self.needle_x + 10, self.needle_y + 10)]
+                             QPoint(self.needle_x - 7, self.needle_y + 7),
+                             QPoint(self.needle_x + 7, self.needle_y + 7)]
         # Set the Font Family
         self.fontDB = QFontDatabase()
         self.font_id = self.fontDB.addApplicationFont('Fonts/HD_HARMONY_B.TTF')
@@ -59,24 +59,24 @@ class AnalogLinearGaugeWidget(QWidget):
     # Drawing the Rectangle Bar
     def drawRectangles(self, qp):
         qp.setPen(QPen(Qt.NoPen))
-        grad = QLinearGradient(self.x, self.y, self.width()-30, self.height())
+        grad = QLinearGradient(self.x, self.y, self.width()-20, self.height())
         grad.setColorAt(0.0, Qt.green)
         grad.setColorAt(0.5, Qt.yellow)
         grad.setColorAt(1.0, Qt.red)
         qp.setBrush(QBrush(grad))
-        qp.drawRect(self.x, self.y, self.width()-30, self.height() - 60)
+        qp.drawRect(self.x, self.y, self.width()-20, self.height() - 50)
 
     # Drawing the units text
     def drawUnitsText(self, qp):
         qp.setPen(QPen(Qt.white, 1, Qt.SolidLine))
         qp.setFont(QFont(self.font_family, 13))
-        qp.drawText(self.x, self.height() - 45, self.units)
+        qp.drawText(self.x, self.y - 2, self.units)
 
     # Drawing the value text
     def drawValueText(self, qp):
         qp.setPen(QPen(Qt.red, 1, Qt.SolidLine))
         qp.setFont(QFont(self.font_family, 15))
-        qp.drawText(self.x + 100, self.height() - 45, str(self.value))
+        qp.drawText(self.x + 100, self.y - 2, str(self.value))
 
     # Drawing the scale value
     def drawScale(self, qp):
@@ -90,12 +90,12 @@ class AnalogLinearGaugeWidget(QWidget):
             #     continue
             if i == 0 or i == self.maxValue:
                 qp.setFont(QFont(self.font_family, 9))
-                qp.drawText(scale_x, self.height(), str(i))
+                qp.drawText(scale_x-10, self.height(), str(i))
                 continue
             if i % 10 == 0:
                 qp.drawLine(scale_x, self.y, scale_x, self.y + 10)
                 qp.setFont(QFont(self.font_family, 9))
-                qp.drawText(scale_x, self.height(), str(i))
+                qp.drawText(scale_x-10, self.height(), str(i))
                 continue
             qp.drawLine(scale_x, self.y, scale_x, self.y + 5)
 

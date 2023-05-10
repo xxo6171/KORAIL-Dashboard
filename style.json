@@ -49,7 +49,7 @@
       "displayValueColor": "white",
       "needleColor": "red",
       "enableOuterHalfCircle": true,
-      "outerRadius": "8",
+      "outerRadius": "5",
       "valueFontFamily": [
         {
           "path": "Fonts/HD_HARMONY_M.TTF",
@@ -66,7 +66,7 @@
             "color1": "black"
       }],
       "enableScalePolygon": false,
-      "bigScaleColor" : "red",
+      "bigScaleColor" : "white",
       "fineScaleColor" : "white"
     },
     {
@@ -112,11 +112,12 @@
       "displayValueColor": "white",
       "scaleStartAngle": "270",
       "totalScaleAngle": "90",
+      "circlePadding": "60",
       "enableOuterCircle": false,
-      "enableCenterPoint": false,
+      "enableCenterPoint": true,
       "enableScaleText": true,
       "enableInnerValueText": false,
-      "needleLength": "0.6",
+      "needleLength": "0.8",
       "needleColor": "red",
       "valueFontFamily": [
         {
@@ -137,18 +138,22 @@
     },
     {
       "name": "widget_5",
-      "units": " ",
+      "units": "bar",
       "minValue": "0",
-      "maxValue": "100",
-      "scalaCount": "10",
-      "scalaSubDivCount": "10",
-      "scaleFontSize": "25",
+      "maxValue": "500",
+      "scalaCount": "5",
+      "scalaSubDivCount": "30",
+      "scaleFontSize": "24",
       "valueFontSize": "50",
       "scaleValueColor": "white",
       "displayValueColor": "white",
-      "needleColor": "cyan",
+      "needleColor": "red",
       "enableOuterHalfCircle": true,
-      "outerRadius": "8",
+      "enableInnerValueText": false,
+      "circlePadding": "80",
+      "outerRadius": "40",
+      "needleLength": "1.2",
+      "scaleLength": "7",
       "valueFontFamily": [
         {
           "path": "Fonts/HD_HARMONY_M.TTF",
@@ -181,10 +186,11 @@
       "displayValueColor": "white",
       "scaleStartAngle": "540",
       "totalScaleAngle": "90",
+      "circlePadding": "60",
       "enableOuterCircle": false,
-      "enableCenterPoint": false,
+      "enableCenterPoint": true,
       "enableScaleText": false,
-      "needleLength": "0.6",
+      "needleLength": "0.8",
       "needleColor": "red",
       "valueFontFamily": [
         {
@@ -215,12 +221,12 @@
       "scaleStartAngle": "180",
       "totalScaleAngle": "180",
       "enableOuterCircle": false,
-      "enableCenterPoint": false,
+      "enableCenterPoint": true,
       "enableInnerValueText": false,
-      "needleLength": "0.5",
       "needleColor": "red",
       "outerRadius": "1000",
       "innerRadius": "900",
+      "needleLength": "0.8",
       "valueFontFamily": [
         {
           "path": "Fonts/HD_HARMONY_B.TTF",

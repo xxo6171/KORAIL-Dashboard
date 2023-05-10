@@ -57,6 +57,14 @@ def applyJsonStyle(self, ui, data):
                         # Set outer circle radius
                         gaugeWidget.outer_circle_radius = int(AnalogGaugeWidget["outerRadius"])
 
+                    if "circlePadding" in AnalogGaugeWidget:
+                        # Set outer circle padding
+                        gaugeWidget.circle_padding = int(AnalogGaugeWidget["circlePadding"])
+
+                    if "scaleLength" in AnalogGaugeWidget:
+                        # Set scale length
+                        gaugeWidget.scale_length = int(AnalogGaugeWidget["scaleLength"])
+
                     if "startValue" in AnalogGaugeWidget:
                         # Set start value
                         gaugeWidget.updateValue(int(AnalogGaugeWidget["startValue"]))

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1040</width>
-    <height>728</height>
+    <width>1024</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,8 +25,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1040</width>
-      <height>728</height>
+      <width>1024</width>
+      <height>768</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -107,6 +107,9 @@ font: 14pt &quot;Consolas&quot;;</string>
      </widget>
     </widget>
     <widget class="QWidget" name="page_3">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <widget class="AnalogGaugeWidget" name="widget_1" native="true">
       <property name="enabled">
        <bool>true</bool>
@@ -114,9 +117,9 @@ font: 14pt &quot;Consolas&quot;;</string>
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>20</y>
-        <width>250</width>
-        <height>250</height>
+        <y>10</y>
+        <width>280</width>
+        <height>240</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -130,6 +133,9 @@ font: 14pt &quot;Consolas&quot;;</string>
         <width>1042</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
       </property>
      </widget>
      <widget class="AnalogGaugeWidget" name="widget_2" native="true">
@@ -139,9 +145,9 @@ font: 14pt &quot;Consolas&quot;;</string>
       <property name="geometry">
        <rect>
         <x>360</x>
-        <y>20</y>
-        <width>330</width>
-        <height>260</height>
+        <y>10</y>
+        <width>310</width>
+        <height>270</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -155,6 +161,9 @@ font: 14pt &quot;Consolas&quot;;</string>
         <width>1042</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
       </property>
      </widget>
      <widget class="AnalogGaugeWidget" name="widget_7" native="true">
@@ -163,10 +172,10 @@ font: 14pt &quot;Consolas&quot;;</string>
       </property>
       <property name="geometry">
        <rect>
-        <x>370</x>
-        <y>570</y>
+        <x>360</x>
+        <y>590</y>
         <width>310</width>
-        <height>150</height>
+        <height>160</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -180,6 +189,9 @@ font: 14pt &quot;Consolas&quot;;</string>
         <width>1042</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
       </property>
      </widget>
      <widget class="AnalogGaugeWidget" name="widget_5" native="true">
@@ -188,10 +200,10 @@ font: 14pt &quot;Consolas&quot;;</string>
       </property>
       <property name="geometry">
        <rect>
-        <x>390</x>
+        <x>360</x>
         <y>290</y>
-        <width>270</width>
-        <height>260</height>
+        <width>310</width>
+        <height>290</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -205,6 +217,9 @@ font: 14pt &quot;Consolas&quot;;</string>
         <width>1042</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
       </property>
      </widget>
      <widget class="AnalogGaugeWidget" name="widget_6" native="true">
@@ -213,97 +228,8 @@ font: 14pt &quot;Consolas&quot;;</string>
       </property>
       <property name="geometry">
        <rect>
-        <x>700</x>
-        <y>280</y>
-        <width>210</width>
-        <height>200</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>1042</width>
-        <height>16777215</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="AnalogLinearGaugeWidget" name="widget_11" native="true">
-      <property name="geometry">
-       <rect>
-        <x>700</x>
-        <y>570</y>
-        <width>330</width>
-        <height>70</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-     <widget class="AnalogLinearGaugeWidget" name="widget_8" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>490</y>
-        <width>330</width>
-        <height>70</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-     <widget class="AnalogLinearGaugeWidget" name="widget_9" native="true">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>570</y>
-        <width>330</width>
-        <height>70</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-     <widget class="AnalogLinearGaugeWidget" name="widget_10" native="true">
-      <property name="geometry">
-       <rect>
-        <x>700</x>
-        <y>490</y>
-        <width>330</width>
-        <height>70</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-     <widget class="AnalogGaugeWidget" name="widget_3" native="true">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>760</x>
-        <y>20</y>
+        <x>690</x>
+        <y>260</y>
         <width>250</width>
         <height>250</height>
        </rect>
@@ -320,17 +246,96 @@ font: 14pt &quot;Consolas&quot;;</string>
         <height>16777215</height>
        </size>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
+      </property>
      </widget>
-     <widget class="AnalogGaugeWidget" name="widget_4" native="true">
+     <widget class="AnalogLinearGaugeWidget" name="widget_11" native="true">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>610</y>
+        <width>320</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
+      </property>
+     </widget>
+     <widget class="AnalogLinearGaugeWidget" name="widget_8" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>520</y>
+        <width>320</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
+      </property>
+     </widget>
+     <widget class="AnalogLinearGaugeWidget" name="widget_9" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>610</y>
+        <width>320</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
+      </property>
+     </widget>
+     <widget class="AnalogLinearGaugeWidget" name="widget_10" native="true">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>520</y>
+        <width>320</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
+      </property>
+     </widget>
+     <widget class="AnalogGaugeWidget" name="widget_3" native="true">
       <property name="enabled">
        <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>280</y>
-        <width>210</width>
-        <height>200</height>
+        <x>710</x>
+        <y>10</y>
+        <width>280</width>
+        <height>240</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -344,6 +349,37 @@ font: 14pt &quot;Consolas&quot;;</string>
         <width>1042</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
+      </property>
+     </widget>
+     <widget class="AnalogGaugeWidget" name="widget_4" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>260</y>
+        <width>250</width>
+        <height>250</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1042</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
       </property>
      </widget>
     </widget>
@@ -357,23 +393,32 @@ font: 14pt &quot;Consolas&quot;;</string>
         <height>651</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QToolButton" name="toolButton">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>10</y>
+        <y>60</y>
         <width>80</width>
         <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(85, 255, 127);
-font: 14pt &quot;Arial&quot;;
-background-color: rgb(255, 0, 0);</string>
+       <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border-radius: 20px</string>
       </property>
       <property name="text">
-       <string>BACK</string>
+       <string/>
+      </property>
+      <property name="autoRaise">
+       <bool>false</bool>
+      </property>
+      <property name="arrowType">
+       <enum>Qt::LeftArrow</enum>
       </property>
      </widget>
      <widget class="QLabel" name="label_date">
@@ -387,7 +432,7 @@ background-color: rgb(255, 0, 0);</string>
       </property>
       <property name="styleSheet">
        <string notr="true">color: white;
-font: 24pt Malgon Gothic;</string>
+font: 24pt HDharmony B;</string>
       </property>
       <property name="text">
        <string/>

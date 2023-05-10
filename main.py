@@ -27,7 +27,7 @@ class MainWindow(QMainWindow):
                            _data=getDataNumpy(strftime('%Y%m%d')))
 
         self.ui_list = self.ui.getUiList()
-        self.connectClickUi(self.ui_list, self.ui.pushButton)
+        self.connectClickUi(self.ui_list, self.ui.toolButton)
 
         self.thread_list = Threads().getThreadList()
         self.run(self.ui_list, self.thread_list)
@@ -91,7 +91,8 @@ if __name__ == '__main__':
     window = MainWindow()
     # window.setFixedSize(1680, 1050)
     # window.showFullScreen()
-    window.setFixedSize(1040, 728)
+    window.setFixedSize(1024, 768)
+    # window.setWindowFlags(Qt.FramelessWindowHint)
     window.show()
 
     app.setQuitOnLastWindowClosed(True)

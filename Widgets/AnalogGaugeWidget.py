@@ -57,6 +57,8 @@ class AnalogGaugeWidget(QWidget):
         self.scale_angle_start_value = 135
         self.scale_angle_size = 270
 
+        self.scale_length = -1
+
         self.angle_offset = 0
 
         self.setScalaCount(10)
@@ -66,6 +68,8 @@ class AnalogGaugeWidget(QWidget):
 
         # DEFAULT OUTER CIRCLE ADDED RADIUS LENGTH
         self.outer_circle_radius = 3
+
+        self.circle_padding = 13
 
         # DEFAULT POLYGON COLOR
         self.scale_polygon_colors = []
@@ -620,16 +624,22 @@ class AnalogGaugeWidget(QWidget):
     def rescale_method(self):
         # SET WIDTH AND HEIGHT
         if self.width() <= self.height():
-            self.widget_diameter = self.width() - 45
+            self.widget_diameter = self.width() - self.circle_padding
         else:
-            self.widget_diameter = self.height() - 45
+            self.widget_diameter = self.height() - self.circle_padding
+
+        y_length = 30
+        if self.scale_angle_size == 90:
+            y_length = 0
+        if self.scale_angle_size == 180:
+            y_length = 0
 
         # SET NEEDLE SIZE
         self.change_value_needle_style([QPolygon([
             # QPoint(4, 30),
             # QPoint(-4, 30),
-            QPoint(4, 28),
-            QPoint(-4, 28),
+            QPoint(3, y_length),
+            QPoint(-3, y_length),
             QPoint(-2, int(- self.widget_diameter / 2 * self.needle_scale_factor)),
             QPoint(0, int(- self.widget_diameter /
                    2 * self.needle_scale_factor - 6)),
@@ -957,7 +967,8 @@ class AnalogGaugeWidget(QWidget):
 
         my_painter.rotate(self.scale_angle_start_value - self.angle_offset)
         steps_size = (float(self.scale_angle_size) / float(self.scalaCount))
-        scale_line_outer_start = self.widget_diameter // 2 - 1
+        # scale_line_outer_start = self.widget_diameter // 2 - 1
+        scale_line_outer_start = self.widget_diameter // 2 + self.scale_length
         scale_line_length = int((self.widget_diameter / 2) -
                                 (self.widget_diameter / 20) + 2)
 
@@ -1020,7 +1031,8 @@ class AnalogGaugeWidget(QWidget):
         my_painter.rotate(self.scale_angle_start_value - self.angle_offset)
         steps_size = (float(self.scale_angle_size) /
                       float(self.scalaCount * self.scala_subdiv_count))
-        scale_line_outer_start = self.widget_diameter // 2 - 1
+        scale_line_outer_start = self.widget_diameter // 2 + self.scale_length
+        # scale_line_outer_start = self.widget_diameter // 2 - 1
         scale_line_length = int(
             (self.widget_diameter / 2) - (self.widget_diameter / 40))
         for i in range((self.scalaCount * self.scala_subdiv_count) + 1):
@@ -1109,8 +1121,6 @@ class AnalogGaugeWidget(QWidget):
             ((self.widget_diameter / 10) - (self.pen.width() / 2)),
             0,
             self.scale_angle_start_value, 360, False)
-
-        # 150.0 0.0 131 360
 
         grad = QConicalGradient(QPointF(0, 0), 0)
 
