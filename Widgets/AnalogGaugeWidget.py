@@ -64,6 +64,9 @@ class AnalogGaugeWidget(QWidget):
 
         self.pen = QPen(QColor(0, 0, 0))
 
+        # DEFAULT OUTER CIRCLE ADDED RADIUS LENGTH
+        self.outer_circle_radius = 3
+
         # DEFAULT POLYGON COLOR
         self.scale_polygon_colors = []
 
@@ -813,6 +816,13 @@ class AnalogGaugeWidget(QWidget):
         if not self.use_timer_event:
             self.update()
 
+    # SET OUTER CIRCLE RADIUS
+    def setOuterCircleRadius(self, value):
+        self.outer_circle_radius = value
+
+        if not self.use_timer_event:
+            self.update()
+
     # SET SCALE ANGLE
     def setScaleStartAngle(self, value):
         # Value range in DEG: 0 - 360
@@ -937,7 +947,7 @@ class AnalogGaugeWidget(QWidget):
 
         my_painter.rotate(self.scale_angle_start_value - self.angle_offset)
         steps_size = (float(self.scale_angle_size) / float(self.scalaCount))
-        scale_line_outer_start = self.widget_diameter // 2
+        scale_line_outer_start = self.widget_diameter // 2 - 1
         scale_line_length = int((self.widget_diameter / 2) -
                                 (self.widget_diameter / 20) + 2)
 
@@ -994,7 +1004,7 @@ class AnalogGaugeWidget(QWidget):
         my_painter.rotate(self.scale_angle_start_value - self.angle_offset)
         steps_size = (float(self.scale_angle_size) /
                       float(self.scalaCount * self.scala_subdiv_count))
-        scale_line_outer_start = self.widget_diameter // 2
+        scale_line_outer_start = self.widget_diameter // 2 - 1
         scale_line_length = int(
             (self.widget_diameter / 2) - (self.widget_diameter / 40))
         for i in range((self.scalaCount * self.scala_subdiv_count) + 1):
@@ -1103,7 +1113,7 @@ class AnalogGaugeWidget(QWidget):
         painter.setPen(QPen(Qt.white, 1))
 
         points = QPolygonF()
-        outer = (self.widget_diameter / 2) - (self.pen.width()) + 3
+        outer = (self.widget_diameter / 2) - (self.pen.width()) + self.outer_circle_radius
 
         start = 0
         end = 360

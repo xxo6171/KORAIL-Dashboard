@@ -53,6 +53,10 @@ def applyJsonStyle(self, ui, data):
                         # Set scala count
                         gaugeWidget.scala_subdiv_count = int(AnalogGaugeWidget["scalaSubDivCount"])
 
+                    if "outerRadius" in AnalogGaugeWidget:
+                        # Set outer circle radius
+                        gaugeWidget.outer_circle_radius = int(AnalogGaugeWidget["outerRadius"])
+
                     if "startValue" in AnalogGaugeWidget:
                         # Set start value
                         gaugeWidget.updateValue(int(AnalogGaugeWidget["startValue"]))
@@ -65,13 +69,13 @@ def applyJsonStyle(self, ui, data):
                         # Set offset angle
                         gaugeWidget.updateAngleOffset(int(AnalogGaugeWidget["offsetAngle"]))
 
-                    if "innerRadius" in AnalogGaugeWidget:
-                        # Set inner radius
-                        gaugeWidget.setGaugeColorInnerRadiusFactor(int(AnalogGaugeWidget["innerRadius"]))
-
-                    if "outerRadius" in AnalogGaugeWidget:
-                        # Set outer radius
-                        gaugeWidget.setGaugeColorOuterRadiusFactor(int(AnalogGaugeWidget["outerRadius"]))
+                    # if "innerRadius" in AnalogGaugeWidget:
+                    #     # Set inner radius
+                    #     gaugeWidget.setGaugeColorInnerRadiusFactor(int(AnalogGaugeWidget["innerRadius"]))
+                    #
+                    # if "outerRadius" in AnalogGaugeWidget:
+                    #     # Set outer radius
+                    #     gaugeWidget.setGaugeColorOuterRadiusFactor(int(AnalogGaugeWidget["outerRadius"]))
 
                     if "scaleStartAngle" in AnalogGaugeWidget:
                         # Set start angle
