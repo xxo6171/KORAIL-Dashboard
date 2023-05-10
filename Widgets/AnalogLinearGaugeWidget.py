@@ -12,7 +12,8 @@ class AnalogLinearGaugeWidget(QWidget):
         # Initialize value
         self.animation = None
         self.x, self.y = 10, 30
-        self.width, self.height = 300, 10
+        # self.width, self.height = 300, 10
+        # self.width, self.height = self.width(), self.height()
 
         self.units = "UNITS"
         self.minValue = 0
@@ -20,7 +21,7 @@ class AnalogLinearGaugeWidget(QWidget):
         self.value = self.minValue
 
         self.needle_x = 10
-        self.needle_y = self.y + self.height
+        self.needle_y = self.y + self.height() - 18
         self.needle_point = [QPoint(self.needle_x, self.needle_y),
                              QPoint(self.needle_x - 10, self.needle_y + 10),
                              QPoint(self.needle_x + 10, self.needle_y + 10)]
@@ -58,30 +59,30 @@ class AnalogLinearGaugeWidget(QWidget):
     # Drawing the Rectangle Bar
     def drawRectangles(self, qp):
         qp.setPen(QPen(Qt.NoPen))
-        grad = QLinearGradient(self.x, self.y, self.width, self.height)
+        grad = QLinearGradient(self.x, self.y, self.width()-30, self.height())
         grad.setColorAt(0.0, Qt.green)
         grad.setColorAt(0.5, Qt.yellow)
         grad.setColorAt(1.0, Qt.red)
         qp.setBrush(QBrush(grad))
-        qp.drawRect(self.x, self.y, self.width, self.height)
+        qp.drawRect(self.x, self.y, self.width()-30, self.height() - 60)
 
     # Drawing the units text
     def drawUnitsText(self, qp):
         qp.setPen(QPen(Qt.white, 1, Qt.SolidLine))
         qp.setFont(QFont(self.font_family, 13))
-        qp.drawText(self.x, self.height+10, self.units)
+        qp.drawText(self.x, self.height() - 45, self.units)
 
     # Drawing the value text
     def drawValueText(self, qp):
         qp.setPen(QPen(Qt.red, 1, Qt.SolidLine))
         qp.setFont(QFont(self.font_family, 15))
-        qp.drawText(self.x + 100, self.height+10, str(self.value))
+        qp.drawText(self.x + 100, self.height() - 45, str(self.value))
 
     # Drawing the scale value
     def drawScale(self, qp):
         qp.setPen(QPen(Qt.gray, 1, Qt.SolidLine))
         for i in range(self.minValue, self.maxValue+1):
-            scale_x = i * (self.width // self.maxValue) + self.x
+            scale_x = i * (self.width() // self.maxValue) + self.x
             # if i == 0 or i == self.maxValue:
             #     # qp.setPen(QPen(Qt.white, 1, Qt.SolidLine))
             #     qp.setFont(QFont(self.font_family, 10))
@@ -89,12 +90,12 @@ class AnalogLinearGaugeWidget(QWidget):
             #     continue
             if i == 0 or i == self.maxValue:
                 qp.setFont(QFont(self.font_family, 9))
-                qp.drawText(scale_x, self.height + 50, str(i))
+                qp.drawText(scale_x, self.height(), str(i))
                 continue
             if i % 10 == 0:
                 qp.drawLine(scale_x, self.y, scale_x, self.y + 10)
                 qp.setFont(QFont(self.font_family, 9))
-                qp.drawText(scale_x, self.height + 50, str(i))
+                qp.drawText(scale_x, self.height(), str(i))
                 continue
             qp.drawLine(scale_x, self.y, scale_x, self.y + 5)
 
@@ -113,7 +114,7 @@ class AnalogLinearGaugeWidget(QWidget):
         else:
             self.value = value
 
-        x = self.value * (self.width // self.maxValue) + self.needle_x
+        x = self.value * (self.width() // self.maxValue) + self.needle_x
         self.needle_point = [QPoint(x, self.needle_y),
                              QPoint(x-10, self.needle_y+10),
                              QPoint(x+10, self.needle_y+10)]
@@ -121,7 +122,7 @@ class AnalogLinearGaugeWidget(QWidget):
         self.valueChanged.emit(int(value))
 
         if not self.use_timer_event:
-            self.timer.start(1500)
+            # self.timer.start(100000)
             self.update()
 
     # def keyPressEvent(self, e):
