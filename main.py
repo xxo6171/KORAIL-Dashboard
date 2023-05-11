@@ -39,7 +39,7 @@ class MainWindow(QMainWindow):
                            _data=getDataNumpy(strftime('%Y%m%d')))
 
         self.thread_list = Threads().getThreadList()
-        self.timer.singleShot(6500, lambda: self.run(self.ui_list, self.thread_list))
+        # self.timer.singleShot(6500, lambda: self.run(self.ui_list, self.thread_list))
 
     def animationShowLogo(self):
         self.opacity_effect_logo = QGraphicsOpacityEffect()
@@ -54,49 +54,15 @@ class MainWindow(QMainWindow):
         self.animation_logo.start()
         self.timer.singleShot(4000, lambda: self.ui.page_1.deleteLater())
 
-    def animationShowWidget(self, ui_list, effect_list, animation_list):
+    def animationShowWidget(self, ui_list, effect_list, animation_list) -> None:
         for ui, effect, anim in zip(ui_list, effect_list, animation_list):
             effect.setOpacity(0)
             ui.setGraphicsEffect(effect)
-            anim.setDuration(2500)
-            anim.setStartValue(0.0)  # 시작 위치와 크기
-            anim.setEndValue(1.0)  # 종료 위치와 크기
+            anim.setDuration(2000)
+            anim.setStartValue(0.0)
+            anim.setEndValue(1.0)
             anim.setEasingCurve(QEasingCurve.OutQuad)
             anim.start()
-
-    def getEffectVarList(self):
-        self.opacity_effect_1 = QGraphicsOpacityEffect()
-        self.opacity_effect_2 = QGraphicsOpacityEffect()
-        self.opacity_effect_3 = QGraphicsOpacityEffect()
-        self.opacity_effect_4 = QGraphicsOpacityEffect()
-        self.opacity_effect_5 = QGraphicsOpacityEffect()
-        self.opacity_effect_6 = QGraphicsOpacityEffect()
-        self.opacity_effect_7 = QGraphicsOpacityEffect()
-        self.opacity_effect_8 = QGraphicsOpacityEffect()
-        self.opacity_effect_9 = QGraphicsOpacityEffect()
-        self.opacity_effect_10 = QGraphicsOpacityEffect()
-        self.opacity_effect_11 = QGraphicsOpacityEffect()
-
-        return [self.opacity_effect_1, self.opacity_effect_2, self.opacity_effect_3, self.opacity_effect_4,
-                       self.opacity_effect_5, self.opacity_effect_6, self.opacity_effect_7, self.opacity_effect_8,
-                       self.opacity_effect_9, self.opacity_effect_10, self.opacity_effect_11]
-
-    def getAnimationVarList(self):
-        self.animation_1 = QPropertyAnimation(self.opacity_effect_1, b'opacity')
-        self.animation_2 = QPropertyAnimation(self.opacity_effect_2, b'opacity')
-        self.animation_3 = QPropertyAnimation(self.opacity_effect_3, b'opacity')
-        self.animation_4 = QPropertyAnimation(self.opacity_effect_4, b'opacity')
-        self.animation_5 = QPropertyAnimation(self.opacity_effect_5, b'opacity')
-        self.animation_6 = QPropertyAnimation(self.opacity_effect_6, b'opacity')
-        self.animation_7 = QPropertyAnimation(self.opacity_effect_7, b'opacity')
-        self.animation_8 = QPropertyAnimation(self.opacity_effect_8, b'opacity')
-        self.animation_9 = QPropertyAnimation(self.opacity_effect_9, b'opacity')
-        self.animation_10 = QPropertyAnimation(self.opacity_effect_10, b'opacity')
-        self.animation_11 = QPropertyAnimation(self.opacity_effect_11, b'opacity')
-
-        return [self.animation_1, self.animation_2, self.animation_3, self.animation_4,
-                self.animation_5, self.animation_6, self.animation_7, self.animation_8,
-                self.animation_9, self.animation_10, self.animation_11]
 
     # UI 클릭 이벤트 처리
     def connectClickUi(self, ui_list, btn_back) -> None:
@@ -113,19 +79,13 @@ class MainWindow(QMainWindow):
         if self.model.data is not None:
             data = self.model.data[object_id-1, : 50]
 
-        chart = self.ui.widget_chart
-        chart.displayChart(data, object_id)
-
-        stack = self.ui.stackedWidget
-        stack.setCurrentIndex(1)
+        self.ui.widget_chart.displayChart(data, object_id)
+        self.ui.stackedWidget.setCurrentIndex(1)
 
     # 뒤로 가기 버튼 클릭 시 메인 화면 이동
     def switchGraph2MainScreen(self) -> None:
-        chart = self.ui.widget_chart
-        chart.removeChart()
-
-        stack = self.ui.stackedWidget
-        stack.setCurrentIndex(0)
+        self.ui.widget_chart.removeChart()
+        self.ui.stackedWidget.setCurrentIndex(0)
 
     # todo: Executing Interface thread
     def run(self, ui_list, thread_list) -> None:
@@ -144,6 +104,40 @@ class MainWindow(QMainWindow):
         if event.key() == Qt.Key_Escape:
             self.close()
 
+    def getEffectVarList(self):
+        self.opacity_effect_1 = QGraphicsOpacityEffect()
+        self.opacity_effect_2 = QGraphicsOpacityEffect()
+        self.opacity_effect_3 = QGraphicsOpacityEffect()
+        self.opacity_effect_4 = QGraphicsOpacityEffect()
+        self.opacity_effect_5 = QGraphicsOpacityEffect()
+        self.opacity_effect_6 = QGraphicsOpacityEffect()
+        self.opacity_effect_7 = QGraphicsOpacityEffect()
+        self.opacity_effect_8 = QGraphicsOpacityEffect()
+        self.opacity_effect_9 = QGraphicsOpacityEffect()
+        self.opacity_effect_10 = QGraphicsOpacityEffect()
+        self.opacity_effect_11 = QGraphicsOpacityEffect()
+
+        return [self.opacity_effect_1, self.opacity_effect_2, self.opacity_effect_3, self.opacity_effect_4,
+                self.opacity_effect_5, self.opacity_effect_6, self.opacity_effect_7, self.opacity_effect_8,
+                self.opacity_effect_9, self.opacity_effect_10, self.opacity_effect_11]
+
+    def getAnimationVarList(self):
+        self.animation_1 = QPropertyAnimation(self.opacity_effect_1, b'opacity')
+        self.animation_2 = QPropertyAnimation(self.opacity_effect_2, b'opacity')
+        self.animation_3 = QPropertyAnimation(self.opacity_effect_3, b'opacity')
+        self.animation_4 = QPropertyAnimation(self.opacity_effect_4, b'opacity')
+        self.animation_5 = QPropertyAnimation(self.opacity_effect_5, b'opacity')
+        self.animation_6 = QPropertyAnimation(self.opacity_effect_6, b'opacity')
+        self.animation_7 = QPropertyAnimation(self.opacity_effect_7, b'opacity')
+        self.animation_8 = QPropertyAnimation(self.opacity_effect_8, b'opacity')
+        self.animation_9 = QPropertyAnimation(self.opacity_effect_9, b'opacity')
+        self.animation_10 = QPropertyAnimation(self.opacity_effect_10, b'opacity')
+        self.animation_11 = QPropertyAnimation(self.opacity_effect_11, b'opacity')
+
+        return [self.animation_1, self.animation_2, self.animation_3, self.animation_4,
+                self.animation_5, self.animation_6, self.animation_7, self.animation_8,
+                self.animation_9, self.animation_10, self.animation_11]
+
 # 폰트 크기 고정 ( 화면 크기가 다를 시 발생 하는 문제 해결 )
 def suppress_qt_warnings() -> None:
     environ["QT_DEVICE_PIXEL_RATIO"] = "0"
@@ -158,7 +152,7 @@ if __name__ == '__main__':
     # window.setFixedSize(1680, 1050)
     # window.showFullScreen()
     window.setFixedSize(1024, 768)
-    # window.setWindowFlags(Qt.FramelessWindowHint)
+    window.setWindowFlags(Qt.FramelessWindowHint)
     window.show()
 
     app.setQuitOnLastWindowClosed(True)

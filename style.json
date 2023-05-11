@@ -223,6 +223,7 @@
       "minValue": "0",
       "maxValue": "50",
       "scalaCount": "1",
+      "scalaSubDivCount": "50",
       "scaleValueColor": "white",
       "displayValueColor": "white",
       "scaleFontSize": "45",
