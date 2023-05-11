@@ -4,9 +4,10 @@ import numpy as np
 from os import environ
 
 from functools import partial
-from PySide2.QtCore import Slot, QUrl, QTimer
-from PySide2.QtGui import Qt
-from PySide2.QtWidgets import QMainWindow, QApplication
+from PySide2.QtCore import Slot, QUrl, QTimer, QSize, QPropertyAnimation, QRect, QEasingCurve
+from PySide2.QtGui import Qt, QPixmap
+from PySide2.QtWidgets import QMainWindow, QApplication, QGraphicsOpacityEffect, QGraphicsWidget, QGraphicsScene, \
+    QGraphicsView
 from PySide2.QtMultimedia import QSoundEffect
 
 from UI.interface_ui import Ui_MainWindow
@@ -19,18 +20,83 @@ from Model import Model
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.timer = QTimer()
+
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         loadJsonStyle(self, self.ui)
 
-        self.model = Model(_date=strftime('%Y%m%d'),
-                           _data=getDataNumpy(strftime('%Y%m%d')))
-
         self.ui_list = self.ui.getUiList()
         self.connectClickUi(self.ui_list, self.ui.toolButton)
 
+        self.effect_list = self.getEffectVarList()
+        self.animation_list = self.getAnimationVarList()
+
+        self.animationShowLogo()
+        self.timer.singleShot(4000, lambda: self.animationShowWidget(self.ui_list, self.effect_list, self.animation_list))
+
+        self.model = Model(_date=strftime('%Y%m%d'),
+                           _data=getDataNumpy(strftime('%Y%m%d')))
+
         self.thread_list = Threads().getThreadList()
-        # self.run(self.ui_list, self.thread_list)
+        self.timer.singleShot(6500, lambda: self.run(self.ui_list, self.thread_list))
+
+    def animationShowLogo(self):
+        self.opacity_effect_logo = QGraphicsOpacityEffect()
+        self.animation_logo = QPropertyAnimation(self.opacity_effect_logo, b'opacity')
+
+        self.opacity_effect_logo.setOpacity(0)
+        self.ui.label.setGraphicsEffect(self.opacity_effect_logo)
+        self.animation_logo.setDuration(3000)
+        self.animation_logo.setStartValue(0.0)  # 시작 위치와 크기
+        self.animation_logo.setEndValue(1.0)  # 종료 위치와 크기
+        self.animation_logo.setEasingCurve(QEasingCurve.OutQuad)
+        self.animation_logo.start()
+        self.timer.singleShot(4000, lambda: self.ui.page_1.deleteLater())
+
+    def animationShowWidget(self, ui_list, effect_list, animation_list):
+        for ui, effect, anim in zip(ui_list, effect_list, animation_list):
+            effect.setOpacity(0)
+            ui.setGraphicsEffect(effect)
+            anim.setDuration(2500)
+            anim.setStartValue(0.0)  # 시작 위치와 크기
+            anim.setEndValue(1.0)  # 종료 위치와 크기
+            anim.setEasingCurve(QEasingCurve.OutQuad)
+            anim.start()
+
+    def getEffectVarList(self):
+        self.opacity_effect_1 = QGraphicsOpacityEffect()
+        self.opacity_effect_2 = QGraphicsOpacityEffect()
+        self.opacity_effect_3 = QGraphicsOpacityEffect()
+        self.opacity_effect_4 = QGraphicsOpacityEffect()
+        self.opacity_effect_5 = QGraphicsOpacityEffect()
+        self.opacity_effect_6 = QGraphicsOpacityEffect()
+        self.opacity_effect_7 = QGraphicsOpacityEffect()
+        self.opacity_effect_8 = QGraphicsOpacityEffect()
+        self.opacity_effect_9 = QGraphicsOpacityEffect()
+        self.opacity_effect_10 = QGraphicsOpacityEffect()
+        self.opacity_effect_11 = QGraphicsOpacityEffect()
+
+        return [self.opacity_effect_1, self.opacity_effect_2, self.opacity_effect_3, self.opacity_effect_4,
+                       self.opacity_effect_5, self.opacity_effect_6, self.opacity_effect_7, self.opacity_effect_8,
+                       self.opacity_effect_9, self.opacity_effect_10, self.opacity_effect_11]
+
+    def getAnimationVarList(self):
+        self.animation_1 = QPropertyAnimation(self.opacity_effect_1, b'opacity')
+        self.animation_2 = QPropertyAnimation(self.opacity_effect_2, b'opacity')
+        self.animation_3 = QPropertyAnimation(self.opacity_effect_3, b'opacity')
+        self.animation_4 = QPropertyAnimation(self.opacity_effect_4, b'opacity')
+        self.animation_5 = QPropertyAnimation(self.opacity_effect_5, b'opacity')
+        self.animation_6 = QPropertyAnimation(self.opacity_effect_6, b'opacity')
+        self.animation_7 = QPropertyAnimation(self.opacity_effect_7, b'opacity')
+        self.animation_8 = QPropertyAnimation(self.opacity_effect_8, b'opacity')
+        self.animation_9 = QPropertyAnimation(self.opacity_effect_9, b'opacity')
+        self.animation_10 = QPropertyAnimation(self.opacity_effect_10, b'opacity')
+        self.animation_11 = QPropertyAnimation(self.opacity_effect_11, b'opacity')
+
+        return [self.animation_1, self.animation_2, self.animation_3, self.animation_4,
+                self.animation_5, self.animation_6, self.animation_7, self.animation_8,
+                self.animation_9, self.animation_10, self.animation_11]
 
     # UI 클릭 이벤트 처리
     def connectClickUi(self, ui_list, btn_back) -> None:
