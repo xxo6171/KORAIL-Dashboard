@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'interfaceRdLdFL.ui'
+## Form generated from reading UI file 'interfacenlwxSb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -23,7 +23,8 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1024, 768)
-        MainWindow.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        MainWindow.setStyleSheet(u"background-color: rgb(0, 0, 0);\n"
+"background-color: qlineargradient(spread:reflect, x1:0.506, y1:0.523, x2:1, y2:1, stop:0.281755 rgba(15, 15, 15, 255), stop:1 rgba(22, 52, 83, 255))")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setEnabled(True)
@@ -35,34 +36,11 @@ class Ui_MainWindow(object):
         self.page_1.setObjectName(u"page_1")
         self.label = QLabel(self.page_1)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(80, 190, 881, 231))
-        self.label.setStyleSheet(u"image: url(:/newPrefix/korail.png);")
+        self.label.setGeometry(QRect(80, 260, 881, 231))
+        self.label.setStyleSheet(u"image: url(:/newPrefix/korail.png);\n"
+"background-color: rgb(0, 0, 0, 0);")
         self.label.setAlignment(Qt.AlignCenter)
-        self.progressBar = QProgressBar(self.page_1)
-        self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setEnabled(True)
-        self.progressBar.setGeometry(QRect(160, 480, 731, 15))
-        self.progressBar.setStyleSheet(u"QProgressBar{\n"
-"	background-color: rgb(0, 0, 0);\n"
-"	color: rgb(255, 255, 255);\n"
-"	font: 12pt \"Consolas\";\n"
-"	border-radius: 30px;\n"
-"	text-align: center;\n"
-"}\n"
-"QProgressBar::chunk{\n"
-"	border-radius: 10px;\n"
-"	\n"
-"	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgba(0, 228, 255, 255));\n"
-"}")
-        self.progressBar.setValue(24)
-        self.label_loading = QLabel(self.page_1)
-        self.label_loading.setObjectName(u"label_loading")
-        self.label_loading.setEnabled(True)
-        self.label_loading.setGeometry(QRect(280, 510, 501, 41))
-        self.label_loading.setStyleSheet(u"color: rgb(255, 255, 255);\n"
-"font: 14pt \"Consolas\";")
-        self.label_loading.setAlignment(Qt.AlignCenter)
-        # self.stackedWidget.addWidget(self.page_1)
+        self.stackedWidget.addWidget(self.page_1)
         self.page_3 = QWidget()
         self.page_3.setObjectName(u"page_3")
         self.page_3.setStyleSheet(u"")
@@ -154,22 +132,23 @@ class Ui_MainWindow(object):
         self.page_4.setObjectName(u"page_4")
         self.widget_chart = Chart(self.page_4)
         self.widget_chart.setObjectName(u"widget_chart")
-        self.widget_chart.setGeometry(QRect(0, 70, 1040, 651))
+        self.widget_chart.setGeometry(QRect(0, 0, 1024, 768))
         self.widget_chart.setStyleSheet(u"")
-        self.toolButton = QToolButton(self.page_4)
-        self.toolButton.setObjectName(u"toolButton")
-        self.toolButton.setGeometry(QRect(10, 60, 80, 41))
-        self.toolButton.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);\n"
-"border-radius: 20px")
-        self.toolButton.setAutoRaise(False)
-        self.toolButton.setArrowType(Qt.LeftArrow)
         self.label_date = QLabel(self.page_4)
         self.label_date.setObjectName(u"label_date")
-        self.label_date.setGeometry(QRect(810, 30, 221, 31))
+        self.label_date.setGeometry(QRect(800, 30, 221, 31))
         self.label_date.setStyleSheet(u"color: white;\n"
-"font: 24pt HDharmony B;")
+"font: 24pt HDharmony B;\n"
+"background-color: rgba(0, 0, 0, 0);")
         self.label_date.setAlignment(Qt.AlignCenter)
+        self.toolButton = QToolButton(self.page_4)
+        self.toolButton.setObjectName(u"toolButton")
+        self.toolButton.setGeometry(QRect(10, 20, 80, 41))
+        self.toolButton.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"background-color: rgb(255, 255, 255);\n"
+"border-radius: 15px")
+        self.toolButton.setAutoRaise(False)
+        self.toolButton.setArrowType(Qt.LeftArrow)
         self.stackedWidget.addWidget(self.page_4)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -182,12 +161,10 @@ class Ui_MainWindow(object):
         from time import strftime
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label.setText("")
-        self.label_loading.setText(QCoreApplication.translate("MainWindow", u"LOADING...", None))
+        # self.label_loading.setText(QCoreApplication.translate("MainWindow", u"LOADING...", None))
         self.label_date.setText(QCoreApplication.translate("MainWindow", strftime(u"%Y.%m.%d"), None))
     # retranslateUi
 
     def getUiList(self):
         return [self.widget_1, self.widget_2, self.widget_3, self.widget_4, self.widget_5,
                 self.widget_6, self.widget_7, self.widget_8, self.widget_9, self.widget_10, self.widget_11]
-
-

@@ -15,7 +15,7 @@ class AnalogLinearGaugeWidget(QWidget):
         # self.width, self.height = 300, 10
         # self.width, self.height = self.width(), self.height()
 
-        self.units = "UNITS"
+        self.units = "UNIT"
         self.minValue = 0
         self.maxValue = 100
         self.value = self.minValue

@@ -27,7 +27,9 @@
         }
       ],
       "outerCircleColor": [{
-            "color1": "black"
+            "color1": "#070C2D",
+            "color2": "#070C2D",
+            "color3": "#282828"
       }],
       "scalePolygonColor": [{
 			"color1": "green",
@@ -63,7 +65,9 @@
         }
       ],
       "outerCircleColor": [{
-            "color1": "black"
+            "color1": "#282828",
+            "color2": "#282828",
+            "color3": "#070C2D"
       }],
       "enableScalePolygon": false,
       "bigScaleColor" : "white",
@@ -75,6 +79,7 @@
       "minValue":"0",
       "maxValue": "80",
       "scalaCount": "8",
+      "scalaSubDivCount": "20",
       "scaleFontSize": "25",
       "valueFontSize": "50",
       "scaleValueColor": "white",
@@ -93,7 +98,9 @@
         }
       ],
       "outerCircleColor": [{
-            "color1": "black"
+            "color1": "#282828",
+            "color2": "#282828",
+            "color3": "#070C2D"
       }],
       "enableScalePolygon": false,
       "bigScaleColor" : "red",
@@ -105,7 +112,7 @@
       "minValue":"100",
       "maxValue": "0",
       "scalaCount": "2",
-      "scalaSubDivCount": "5",
+      "scalaSubDivCount": "20",
       "scaleFontSize": "30",
       "valueFontSize": "50",
       "scaleValueColor": "white",
@@ -140,20 +147,20 @@
       "name": "widget_5",
       "units": "bar",
       "minValue": "0",
-      "maxValue": "500",
+      "maxValue": "200",
       "scalaCount": "5",
       "scalaSubDivCount": "30",
-      "scaleFontSize": "24",
+      "scaleFontSize": "26",
       "valueFontSize": "50",
       "scaleValueColor": "white",
       "displayValueColor": "white",
-      "needleColor": "red",
+      "needleColor": "white",
       "enableOuterHalfCircle": true,
       "enableInnerValueText": false,
-      "circlePadding": "80",
-      "outerRadius": "40",
+      "circlePadding": "90",
+      "outerRadius": "45",
       "needleLength": "1.2",
-      "scaleLength": "7",
+      "scaleLength": "8",
       "valueFontFamily": [
         {
           "path": "Fonts/HD_HARMONY_M.TTF",
@@ -167,10 +174,12 @@
         }
       ],
       "outerCircleColor": [{
-            "color1": "black"
+            "color1": "#23292A",
+            "color2": "#23292A",
+            "color3": "#155989"
       }],
       "enableScalePolygon": false,
-      "bigScaleColor" : "white",
+      "bigScaleColor" : "red",
       "fineScaleColor" : "white"
     },
     {

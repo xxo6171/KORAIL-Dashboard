@@ -3,7 +3,8 @@
 from PySide2.QtWidgets import QWidget, QVBoxLayout
 from PySide2.QtCore import QTimer, Qt, QEasingCurve
 from PySide2.QtCharts import QtCharts
-from PySide2.QtGui import QPainter, QBrush, QFont, QPen
+from PySide2.QtGui import QPainter, QBrush, QFont, QPen, QColor
+
 
 class Chart(QWidget):
     def __init__(self, parent=None):
@@ -37,7 +38,7 @@ class Chart(QWidget):
 
         self.chart = QtCharts.QChart()
         self.chart.setTheme(QtCharts.QChart.ChartThemeDark)
-        self.chart.setBackgroundBrush(QBrush(Qt.black))
+        self.chart.setBackgroundBrush(QBrush(Qt.transparent))
         self.chart.legend().setVisible(False)
         self.chart.setAnimationOptions(QtCharts.QChart.AllAnimations)
         # InQuint와 반대로 시작 시간이 길고 끝나는 시간이 짧은 뾰족한 애니메이션 (5차 함수)
@@ -53,7 +54,7 @@ class Chart(QWidget):
         self.chart.setTitleFont(title_font)
 
         self.series = QtCharts.QLineSeries()
-        self.series.setPen(QPen(Qt.green, 2))
+        self.series.setPen(QPen(Qt.cyan, 2))
         if data is not None:
             for val in data:
                 self.series.append(val[0], val[1])

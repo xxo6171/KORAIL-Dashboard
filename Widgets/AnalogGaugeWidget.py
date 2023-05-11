@@ -997,7 +997,7 @@ class AnalogGaugeWidget(QWidget):
         text_radius_factor = 0.8
 
         if not self.enable_inner_value_text:
-            text_radius_factor = 1.2
+            text_radius_factor = 1.24
 
         text_radius = self.widget_diameter / 2 * text_radius_factor
 
@@ -1136,7 +1136,14 @@ class AnalogGaugeWidget(QWidget):
         painter.setRenderHint(QPainter.Antialiasing)
 
         painter.translate(self.width() / 2, self.height() / 2)
-        painter.setPen(QPen(Qt.white, 1))
+        painter.setPen(QPen(Qt.white, 2))
+        painter.setBrush(QColor(40, 40, 40, 100))
+        # radialGradient = QRadialGradient(QPointF(0, 0), self.width())
+        #
+        # for eachcolor in self.outer_circle_bg:
+        #     radialGradient.setColorAt(eachcolor[0], eachcolor[1])
+        #
+        # painter.setBrush(radialGradient)
 
         points = QPolygonF()
         outer = (self.widget_diameter / 2) - (self.pen.width()) + self.outer_circle_radius
@@ -1163,18 +1170,18 @@ class AnalogGaugeWidget(QWidget):
 
         painter.translate(self.width() / 2, self.height() / 2)
         painter.setPen(Qt.NoPen)
-        # painter.setPen(QPen(Qt.red))
         colored_scale_polygon = self.create_polygon_pie(
             ((self.widget_diameter / 2) - (self.pen.width())),
             (self.widget_diameter / 6),
             self.scale_angle_start_value / 10, 360, False)
 
-        radialGradient = QRadialGradient(QPointF(0, 0), self.width())
+        # radialGradient = QRadialGradient(QPointF(0, 0), self.width())
+        #
+        # for eachcolor in self.outer_circle_bg:
+        #     radialGradient.setColorAt(eachcolor[0], eachcolor[1])
 
-        for eachcolor in self.outer_circle_bg:
-            radialGradient.setColorAt(eachcolor[0], eachcolor[1])
-
-        painter.setBrush(radialGradient)
+        # painter.setBrush(radialGradient)
+        # painter.setBrush(QColor(30, 30, 30))
         painter.drawPolygon(colored_scale_polygon)
 
     # NEEDLE POINTER
@@ -1198,10 +1205,10 @@ class AnalogGaugeWidget(QWidget):
 
     # ON PAINT EVENT
     def paintEvent(self, event):
+        if self.enable_outer_circle:
+            self.draw_outer_circle()
 
         self.draw_circle()
-
-
 
         # colored pie area
         if self.enable_filled_Polygon:
@@ -1230,8 +1237,7 @@ class AnalogGaugeWidget(QWidget):
         if self.enable_CenterPoint:
             self.draw_big_needle_center_point(diameter=int(self.widget_diameter / 6))
 
-        if self.enable_outer_circle:
-            self.draw_outer_circle()
+
 
 # if __name__ == '__main__':
 #     app = QApplication([])
