@@ -44,7 +44,7 @@
       "minValue":"0",
       "maxValue": "260",
       "scalaCount": "13",
-      "scalaSubDivCount": "20",
+      "scalaSubDivCount": "10",
       "scaleFontSize": "22",
       "valueFontSize": "45",
       "scaleValueColor": "white",
@@ -85,6 +85,7 @@
       "scaleValueColor": "white",
       "displayValueColor": "white",
       "needleColor": "red",
+      "outerRadius": "5",
       "valueFontFamily": [
         {
           "path": "Fonts/HD_HARMONY_B.TTF",
@@ -150,7 +151,7 @@
       "maxValue": "200",
       "scalaCount": "5",
       "scalaSubDivCount": "30",
-      "scaleFontSize": "26",
+      "scaleFontSize": "24",
       "valueFontSize": "50",
       "scaleValueColor": "white",
       "displayValueColor": "white",
@@ -159,7 +160,7 @@
       "enableInnerValueText": false,
       "circlePadding": "90",
       "outerRadius": "45",
-      "needleLength": "1.2",
+      "needleLength": "1.3",
       "scaleLength": "8",
       "valueFontFamily": [
         {
@@ -179,8 +180,8 @@
             "color3": "#155989"
       }],
       "enableScalePolygon": false,
-      "bigScaleColor" : "red",
-      "fineScaleColor" : "white"
+      "bigScaleColor" : "white",
+      "fineScaleColor" : "gray"
     },
     {
       "name": "widget_6",

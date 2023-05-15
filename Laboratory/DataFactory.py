@@ -50,15 +50,13 @@ def dataLogging(widget, date):
                     if t == 86400:
                         break
                     # t = time.strftime('%H%M%S')
-                    value = random.randrange(100, 201)
+                    value = random.randint(190, 201)
                     data = f'{t} {value}\n'
                     f.write(data)
                     t += 1
                 except KeyboardInterrupt:
                     sys.exit(0)
 
-a = 12
-print(sys.getsizeof(a))
 # if __name__ == '__main__':
     # a = np.uint8(100)
     # b = np.uint16(100)

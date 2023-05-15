@@ -50,7 +50,7 @@ def dataLogging(widget, date):
                     if t == 86400:
                         break
                     # t = time.strftime('%H%M%S')
-                    value = random.randrange(0, 201)
+                    value = random.randrange(100, 201)
                     data = f'{t} {value}\n'
                     f.write(data)
                     t += 1

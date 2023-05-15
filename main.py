@@ -1,13 +1,13 @@
 from sys import getsizeof, argv, exit
 from time import strftime
-import numpy as np
 from os import environ
 
+import numpy as np
+
 from functools import partial
-from PySide2.QtCore import Slot, QUrl, QTimer, QSize, QPropertyAnimation, QRect, QEasingCurve
-from PySide2.QtGui import Qt, QPixmap
-from PySide2.QtWidgets import QMainWindow, QApplication, QGraphicsOpacityEffect, QGraphicsWidget, QGraphicsScene, \
-    QGraphicsView
+from PySide2.QtCore import Slot, QUrl, QTimer, QPropertyAnimation, QEasingCurve
+from PySide2.QtGui import Qt
+from PySide2.QtWidgets import QMainWindow, QApplication, QGraphicsOpacityEffect
 from PySide2.QtMultimedia import QSoundEffect
 
 from UI.interface_ui import Ui_MainWindow
@@ -32,36 +32,38 @@ class MainWindow(QMainWindow):
         self.effect_list = self.getEffectVarList()
         self.animation_list = self.getAnimationVarList()
 
-        self.animationShowLogo()
+        self.animationShowSplash()
         self.timer.singleShot(4000, lambda: self.animationShowWidget(self.ui_list, self.effect_list, self.animation_list))
 
         self.model = Model(_date=strftime('%Y%m%d'),
                            _data=getDataNumpy(strftime('%Y%m%d')))
 
         self.thread_list = Threads().getThreadList()
-        # self.timer.singleShot(6500, lambda: self.run(self.ui_list, self.thread_list))
+        # self.timer.singleShot(7500, lambda: self.run(self.ui_list, self.thread_list))
 
-    def animationShowLogo(self):
+    def animationShowSplash(self):
         self.opacity_effect_logo = QGraphicsOpacityEffect()
         self.animation_logo = QPropertyAnimation(self.opacity_effect_logo, b'opacity')
 
         self.opacity_effect_logo.setOpacity(0)
         self.ui.label.setGraphicsEffect(self.opacity_effect_logo)
-        self.animation_logo.setDuration(3000)
+        self.animation_logo.setDuration(1500)
         self.animation_logo.setStartValue(0.0)  # 시작 위치와 크기
         self.animation_logo.setEndValue(1.0)  # 종료 위치와 크기
-        self.animation_logo.setEasingCurve(QEasingCurve.OutQuad)
+        self.animation_logo.setEasingCurve(QEasingCurve.InSine)
         self.animation_logo.start()
         self.timer.singleShot(4000, lambda: self.ui.page_1.deleteLater())
 
-    def animationShowWidget(self, ui_list, effect_list, animation_list) -> None:
+    # noinspection PyMethodMayBeStatic
+    def animationShowWidget(self, ui_list, effect_list, animation_list):
         for ui, effect, anim in zip(ui_list, effect_list, animation_list):
             effect.setOpacity(0)
             ui.setGraphicsEffect(effect)
-            anim.setDuration(2000)
+            anim.setDuration(1800)
             anim.setStartValue(0.0)
             anim.setEndValue(1.0)
-            anim.setEasingCurve(QEasingCurve.OutQuad)
+            # anim.setEasingCurve(QEasingCurve.InExpo)
+            anim.setEasingCurve(QEasingCurve.InSine)
             anim.start()
 
     # UI 클릭 이벤트 처리
@@ -151,8 +153,8 @@ if __name__ == '__main__':
     window = MainWindow()
     # window.setFixedSize(1680, 1050)
     # window.showFullScreen()
+    # window.setWindowFlags(Qt.FramelessWindowHint)
     window.setFixedSize(1024, 768)
-    window.setWindowFlags(Qt.FramelessWindowHint)
     window.show()
 
     app.setQuitOnLastWindowClosed(True)

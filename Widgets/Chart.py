@@ -1,9 +1,11 @@
 # todo: Visualize graphs of data logged with measurements from CAN devices
 # todo: Reading .txt File
+import random
+
 from PySide2.QtWidgets import QWidget, QVBoxLayout
 from PySide2.QtCore import QTimer, Qt, QEasingCurve
 from PySide2.QtCharts import QtCharts
-from PySide2.QtGui import QPainter, QBrush, QFont, QPen, QColor
+from PySide2.QtGui import QPainter, QBrush, QFont, QPen
 
 
 class Chart(QWidget):
@@ -15,17 +17,18 @@ class Chart(QWidget):
         self.chart_view = None
         self.chart = None
         self.series = None
+        self.series2 = None
         self.layout = None
 
         self.font = QFont('HDharmony M')
 
-        self.deviceType = [('차량 속도', 'KM'),
-                           ('기관 회전 값', 'RPM'), ('기관 온도', 'ºC'),
-                           ('기관 유압', 'BAR'),
-                           ('변속기 압력', 'BAR'), ('변속기 온도', 'ºC'),
-                           ('제동칸 압력', 'BAR'), ('제동통 압력', 'BAR'),
-                           ('주공기 압력', 'BAR'),
-                           ('전압', 'V'), ('전류', 'A')]
+        self.deviceType = [('차량 속도', '속도 (km/h)'),
+                           ('기관 회전 값', 'rpm '), ('기관 온도', '온도 (ºC)'),
+                           ('기관 유압', '압력 (bar)'),
+                           ('변속기 압력', '압력 (bar)'), ('변속기 온도', '온도 (ºC)'),
+                           ('제동칸 압력', '압력 (bar)'), ('제동통 압력', '압력 (bar)'),
+                           ('주공기 압력', '압력 (bar)'),
+                           ('전압', 'V '), ('전류', 'A ')]
 
         if self.use_timer_event:
             self.timer.timeout.connect(self.update)
@@ -46,6 +49,7 @@ class Chart(QWidget):
 
         title = self.deviceType[idx-1][0]
         unit = self.deviceType[idx-1][1]
+        unit2 = '온도'
 
         self.chart.setTitle(title)
         title_font = self.chart.titleFont()
@@ -54,11 +58,22 @@ class Chart(QWidget):
         self.chart.setTitleFont(title_font)
 
         self.series = QtCharts.QLineSeries()
+        self.series.setName(unit.split()[0])
         self.series.setPen(QPen(Qt.cyan, 2))
         if data is not None:
             for val in data:
                 self.series.append(val[0], val[1])
         self.chart.addSeries(self.series)
+
+        if '압' in unit:
+            self.series2 = QtCharts.QLineSeries()
+            self.series2.setName(unit2)
+
+            self.series2.setPen(QPen(Qt.red, 2))
+            for i in range(1, 51):
+                value = random.randrange(20, 50)
+                self.series2.append(i, value)
+            self.chart.addSeries(self.series2)
 
         # Create a QValueAxis for the x-axis
         axis_x = QtCharts.QValueAxis()
@@ -72,27 +87,56 @@ class Chart(QWidget):
         axis_y.setTickCount(6)
         axis_y.setLabelFormat("%d")
 
+        axis_y2 = QtCharts.QValueAxis()
+        axis_y2.setRange(0, 100)
+        axis_y2.setTickCount(6)
+        axis_y2.setLabelFormat("%d")
+
         # Add the axes to the chart
         self.chart.addAxis(axis_x, Qt.AlignBottom)
         self.chart.addAxis(axis_y, Qt.AlignLeft)
-        self.chart.axisX().setGridLineVisible(False)
-        self.chart.axisY().setLineVisible(False)
 
-        for i, axis in enumerate([self.chart.axisX(), self.chart.axisY()]):
+        axis_x.setGridLineVisible(False)
+        axis_y.setLineVisible(False)
+
+        if '압' in unit:
+            self.chart.addAxis(axis_y2, Qt.AlignRight)
+            axis_y2.setLineVisible(False)
+
+        axis_list = [axis_x, axis_y]
+        if '압' in unit:
+            axis_list.append(axis_y2)
+
+        for i, axis in enumerate(axis_list):
             axis_font = axis.labelsFont()
             axis_font.setFamily(self.font.family())
             axis_font.setPointSize(20)
             axis.setLabelsFont(axis_font)
             axis.setTitleFont(axis_font)
-            axis.setTitleText("시간" if i == 0 else unit)
+            if i == 0:
+                axis.setTitleText("시간")
+                continue
+            if i == 1:
+                axis.setTitleText(unit)
+            if i == 2:
+                axis.setTitleText(unit2)
+            # axis.setTitleText("시간" if i == 0 else unit)
 
         # Attach the series to the axes
         self.series.attachAxis(axis_x)
         self.series.attachAxis(axis_y)
 
+        if '압' in unit:
+            self.series2.attachAxis(axis_x)
+            self.series2.attachAxis(axis_y2)
+            legend = self.chart.legend()
+            legend.setFont(QFont(self.font.family(), 15))
+            legend.setAlignment(Qt.AlignTop)
+            legend.setVisible(True)
+
         # Create a QChartView to display the chart
         self.chart_view = QtCharts.QChartView(self.chart)
-        self.chart_view.setRenderHint(QPainter.Antialiasing)
+        self.chart_view.setRenderHint(QPainter.HighQualityAntialiasing)
 
         self.layout.addWidget(self.chart_view)
         self.setLayout(self.layout)
@@ -104,5 +148,7 @@ class Chart(QWidget):
     def removeChart(self):
         # 메모리 해제
         self.chart.deleteLater()
+        # self.series.deleteLater()
+        # self.series2.deleteLater()
         self.chart_view.deleteLater()
         self.layout.deleteLater()

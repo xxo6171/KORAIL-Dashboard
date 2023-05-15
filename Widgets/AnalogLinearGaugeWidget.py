@@ -48,6 +48,7 @@ class AnalogLinearGaugeWidget(QWidget):
 
     def paintEvent(self, event):
         qp = QPainter()
+        qp.setRenderHint(QPainter.HighQualityAntialiasing)
         qp.begin(self)
         self.drawRectangles(qp)
         self.drawUnitsText(qp)

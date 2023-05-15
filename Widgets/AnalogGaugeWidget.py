@@ -1,5 +1,5 @@
 import math
-from PySide2.QtWidgets import QMainWindow, QWidget, QApplication
+from PySide2.QtWidgets import QMainWindow, QWidget
 from PySide2.QtGui import QPolygon, QPolygonF, QColor, QPen, QFont, QPainter, QFontMetrics, QConicalGradient, \
     QRadialGradient, QFontDatabase
 from PySide2.QtCore import Qt, QTime, QTimer, QPoint, QPointF, QRect, QSize, QObject, Signal
@@ -925,7 +925,8 @@ class AnalogGaugeWidget(QWidget):
     def draw_filled_polygon(self, outline_pen_with=0):
         if self.scale_polygon_colors is not None:
             painter_filled_polygon = QPainter(self)
-            painter_filled_polygon.setRenderHint(QPainter.Antialiasing)
+            # painter_filled_polygon.setRenderHint(QPainter.Antialiasing)
+            painter_filled_polygon.setRenderHint(QPainter.HighQualityAntialiasing)
 
             painter_filled_polygon.translate(
                 self.width() / 2, self.height() / 2)
@@ -956,7 +957,8 @@ class AnalogGaugeWidget(QWidget):
     # BIG SCALE MARKERS
     def draw_big_scaled_marker(self):
         my_painter = QPainter(self)
-        my_painter.setRenderHint(QPainter.Antialiasing)
+        # my_painter.setRenderHint(QPainter.Antialiasing)
+        my_painter.setRenderHint(QPainter.HighQualityAntialiasing)
 
         my_painter.translate(self.width() / 2, self.height() / 2)
 
@@ -981,8 +983,8 @@ class AnalogGaugeWidget(QWidget):
 
     def create_scale_marker_values_text(self):
         painter = QPainter(self)
-        # painter.setRenderHint(QPainter.HighQualityAntialiasing)
-        painter.setRenderHint(QPainter.Antialiasing)
+        painter.setRenderHint(QPainter.HighQualityAntialiasing)
+        # painter.setRenderHint(QPainter.Antialiasing)
 
         painter.translate(self.width() / 2, self.height() / 2)
 
@@ -997,7 +999,7 @@ class AnalogGaugeWidget(QWidget):
         text_radius_factor = 0.8
 
         if not self.enable_inner_value_text:
-            text_radius_factor = 1.24
+            text_radius_factor = 1.235
 
         text_radius = self.widget_diameter / 2 * text_radius_factor
 
@@ -1024,6 +1026,7 @@ class AnalogGaugeWidget(QWidget):
         my_painter = QPainter(self)
 
         my_painter.setRenderHint(QPainter.Antialiasing)
+        # my_painter.setRenderHint(QPainter.HighQualityAntialiasing)
 
         my_painter.translate(self.width() / 2, self.height() / 2)
 
@@ -1106,13 +1109,13 @@ class AnalogGaugeWidget(QWidget):
         x = text_radius * math.cos(math.radians(angle))
         y = text_radius * math.sin(math.radians(angle))
         # print(w, h, x, y, text)
-        painter.drawText(int(x - w / 2), int(y - h / 2), int(w),
-                         int(h), Qt.AlignCenter, text)
+        painter.drawText(int(x - w / 2), int(y - h / 2), int(w), int(h), Qt.AlignCenter, text)
 
     # CENTER POINTER
     def draw_big_needle_center_point(self, diameter=30):
         painter = QPainter(self)
-        painter.setRenderHint(QPainter.Antialiasing)
+        # painter.setRenderHint(QPainter.Antialiasing)
+        painter.setRenderHint(QPainter.HighQualityAntialiasing)
 
         painter.translate(self.width() / 2, self.height() / 2)
         painter.setPen(Qt.NoPen)
@@ -1133,11 +1136,12 @@ class AnalogGaugeWidget(QWidget):
 
     def draw_outer_circle(self):
         painter = QPainter(self)
-        painter.setRenderHint(QPainter.Antialiasing)
+        # painter.setRenderHint(QPainter.Antialiasing)
+        painter.setRenderHint(QPainter.HighQualityAntialiasing)
 
         painter.translate(self.width() / 2, self.height() / 2)
         painter.setPen(QPen(Qt.white, 2))
-        painter.setBrush(QColor(40, 40, 40, 100))
+        painter.setBrush(QColor(50, 50, 50, 60))
         # radialGradient = QRadialGradient(QPointF(0, 0), self.width())
         #
         # for eachcolor in self.outer_circle_bg:
@@ -1166,7 +1170,8 @@ class AnalogGaugeWidget(QWidget):
     # CREATE OUTER COVER
     def draw_circle(self, diameter=30):
         painter = QPainter(self)
-        painter.setRenderHint(QPainter.Antialiasing)
+        # painter.setRenderHint(QPainter.Antialiasing)
+        painter.setRenderHint(QPainter.HighQualityAntialiasing)
 
         painter.translate(self.width() / 2, self.height() / 2)
         painter.setPen(Qt.NoPen)
@@ -1188,7 +1193,8 @@ class AnalogGaugeWidget(QWidget):
     def draw_needle(self):
         painter = QPainter(self)
         # painter.setRenderHint(QtGui.QPainter.HighQualityAntialiasing)
-        painter.setRenderHint(QPainter.Antialiasing)
+        # painter.setRenderHint(QPainter.Antialiasing)
+        painter.setRenderHint(QPainter.HighQualityAntialiasing)
 
         painter.translate(self.width() / 2, self.height() / 2)
         painter.setPen(Qt.NoPen)
