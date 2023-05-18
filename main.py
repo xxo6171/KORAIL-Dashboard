@@ -3,8 +3,8 @@ from time import strftime
 from os import environ
 
 from functools import partial
-from PySide2.QtCore import Slot, QUrl, QTimer, QPropertyAnimation, QEasingCurve
-from PySide2.QtGui import Qt
+from PySide2.QtCore import Slot, QUrl, QTimer, QPropertyAnimation, QEasingCurve, QObject
+from PySide2.QtGui import Qt, QKeyEvent
 from PySide2.QtWidgets import QMainWindow, QApplication, QGraphicsOpacityEffect
 from PySide2.QtMultimedia import QSoundEffect
 
@@ -18,25 +18,25 @@ from Model import Model
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.timer = QTimer()
+        self.timer: QTimer = QTimer()
 
-        self.ui = Ui_MainWindow()
+        self.ui: Ui_MainWindow = Ui_MainWindow()
         self.ui.setupUi(self)
         loadJsonStyle(self, self.ui)
 
-        self.ui_list = self.ui.getUiList()
+        self.ui_list: list = self.ui.getUiList()
         self.connectClickUi(self.ui_list)
 
-        self.model = Model(_date=strftime('%Y%m%d'),
-                           _data=getDataNumpy(strftime('%Y%m%d')))
+        self.model: Model = Model(_date=strftime('%Y%m%d'),
+                                  _data=getDataNumpy(strftime('%Y%m%d')))
 
-        self.effects = list(map(self.createOpacityEffect,
-                                [QGraphicsOpacityEffect() for _ in range(12)],
-                                self.ui_list))
+        self.effects: list = list(map(self.createOpacityEffect,
+                                      [QGraphicsOpacityEffect() for _ in range(12)],
+                                      self.ui_list))
 
-        self.animations = list(map(self.createAnimation,
-                                   [QPropertyAnimation() for _ in range(12)],
-                                   self.effects))
+        self.animations: list = list(map(self.createAnimation,
+                                         [QPropertyAnimation() for _ in range(12)],
+                                         self.effects))
 
         self.showAnimation(self.animations, typeOfList=False)
         self.timer.singleShot(4000, lambda: self.showAnimation(self.animations, typeOfList=True))
@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
         # self.timer.singleShot(7500, lambda: self.run(self.ui_list, self.thread_list))
 
     # todo: Show animation on splash and main screen
-    def showAnimation(self, animation, typeOfList=True) -> None:
+    def showAnimation(self, animation: list, typeOfList: bool = True) -> None:
         if not typeOfList:
             animation[0].start()
             return
@@ -57,7 +57,7 @@ class MainWindow(QMainWindow):
 
     # noinspection PyMethodMayBeStatic
     # todo: Create opacity effect by widgets and set the ui from opacity effect.
-    def createOpacityEffect(self, effect, ui) -> QGraphicsOpacityEffect:
+    def createOpacityEffect(self, effect: QGraphicsOpacityEffect, ui: QObject) -> QGraphicsOpacityEffect:
         # todo: tool button do not need the effect.
         if ui.objectName() == 'toolButton':
             return NotImplemented
@@ -67,7 +67,7 @@ class MainWindow(QMainWindow):
 
     # noinspection PyMethodMayBeStatic
     # todo: Create animation by widgets and set the animation options.
-    def createAnimation(self, animation, effect) -> QPropertyAnimation:
+    def createAnimation(self, animation: QPropertyAnimation, effect: QGraphicsOpacityEffect) -> QPropertyAnimation:
         animation.setTargetObject(effect)
         animation.setPropertyName(b'opacity')
         animation.setDuration(1500)
@@ -78,12 +78,12 @@ class MainWindow(QMainWindow):
 
     # noinspection PyMethodMayBeStatic
     # todo: Animation and Effect variables are One-off. Effect variables are automatically free after finishing operate.
-    def freeAnimation(self, animation):
+    def freeAnimation(self, animation: list) -> None:
         for anim in animation:
             anim.deleteLater()
 
     # todo: Ui click event.
-    def connectClickUi(self, ui_list) -> None:
+    def connectClickUi(self, ui_list: list) -> None:
         for ui in ui_list:
             # todo: Nothing works if ui is label logo.
             if ui.objectName() == 'label':
@@ -97,28 +97,23 @@ class MainWindow(QMainWindow):
             clickable(ui).connect(partial(self.switchMain2GraphScreen, idx))
 
     # todo: Switching to graph scene when click the widget.
-    def switchMain2GraphScreen(self, idx) -> None:
-        chart = self.ui.widget_chart
-        stack = self.ui.stackedWidget
+    def switchMain2GraphScreen(self, idx: int) -> None:
         data = None
         object_id = idx
 
         if self.model.data is not None:
             data = self.model.data[object_id-1, : 50]
 
-        chart.displayChart(data, object_id)
-        stack.setCurrentIndex(1)
+        self.ui.widget_chart.displayChart(data, object_id)
+        self.ui.stackedWidget.setCurrentIndex(1)
 
     # todo: Switching to main scene when click the tool button.
     def switchGraph2MainScreen(self) -> None:
-        chart = self.ui.widget_chart
-        stack = self.ui.stackedWidget
-
-        chart.removeChart()
-        stack.setCurrentIndex(0)
+        self.ui.widget_chart.removeChart()
+        self.ui.stackedWidget.setCurrentIndex(0)
 
     # todo: Executing Interface thread
-    def run(self, ui_list, thread_list) -> None:
+    def run(self, ui_list: list, thread_list: list) -> None:
         for thr, ui in zip(thread_list, ui_list):
             thr.progress.connect(partial(self.updateInterface, ui, False if ui.objectName() != 'widget_4' else True))
 
@@ -127,10 +122,10 @@ class MainWindow(QMainWindow):
 
     # todo: Receive from interface thread signal
     @Slot(int)
-    def updateInterface(self, obj: object, inv: bool, value: int) -> None:
+    def updateInterface(self, obj: QObject, inv: bool, value: int) -> None:
         obj.updateValue(value, inv)
 
-    def keyPressEvent(self, event) -> None:
+    def keyPressEvent(self, event: QKeyEvent) -> None:
         if event.key() == Qt.Key_Escape:
             self.close()
 
@@ -143,8 +138,8 @@ def suppress_qt_warnings() -> None:
 
 if __name__ == '__main__':
     suppress_qt_warnings()
-    app = QApplication(argv)
-    window = MainWindow()
+    app: QApplication = QApplication(argv)
+    window: MainWindow = MainWindow()
     # window.setFixedSize(1680, 1050)
     # window.showFullScreen()
     # window.setWindowFlags(Qt.FramelessWindowHint)
