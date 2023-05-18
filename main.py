@@ -32,27 +32,36 @@ class MainWindow(QMainWindow):
         self.effect_list = self.getEffectVarList()
         self.animation_list = self.getAnimationVarList()
 
-        self.animationShowSplash()
+        self.opacity_effect_logo = self.opacityEffect()
+        self.animation_return = self.animationShowSplash(self.opacity_effect_logo)
+
+        self.animation_return.start()
+        self.timer.singleShot(4000, lambda: self.ui.page_1.deleteLater())
+
+
         self.timer.singleShot(4000, lambda: self.animationShowWidget(self.ui_list, self.effect_list, self.animation_list))
 
         self.model = Model(_date=strftime('%Y%m%d'),
                            _data=getDataNumpy(strftime('%Y%m%d')))
 
         self.thread_list = Threads().getThreadList()
-        # self.timer.singleShot(7500, lambda: self.run(self.ui_list, self.thread_list))
+        self.timer.singleShot(7500, lambda: self.run(self.ui_list, self.thread_list))
 
-    def animationShowSplash(self):
-        self.opacity_effect_logo = QGraphicsOpacityEffect()
-        self.animation_logo = QPropertyAnimation(self.opacity_effect_logo, b'opacity')
+    # noinspection PyMethodMayBeStatic
+    def opacityEffect(self):
+        opacity_effect = QGraphicsOpacityEffect()
+        opacity_effect.setOpacity(0)
+        return opacity_effect
 
-        self.opacity_effect_logo.setOpacity(0)
-        self.ui.label.setGraphicsEffect(self.opacity_effect_logo)
-        self.animation_logo.setDuration(1500)
-        self.animation_logo.setStartValue(0.0)  # 시작 위치와 크기
-        self.animation_logo.setEndValue(1.0)  # 종료 위치와 크기
-        self.animation_logo.setEasingCurve(QEasingCurve.InSine)
-        self.animation_logo.start()
-        self.timer.singleShot(4000, lambda: self.ui.page_1.deleteLater())
+    def animationShowSplash(self, opacity_effect_logo):
+        animation_logo = QPropertyAnimation(opacity_effect_logo, b'opacity')
+        opacity_effect_logo.setOpacity(0)
+        self.ui.label.setGraphicsEffect(opacity_effect_logo)
+        animation_logo.setDuration(1500)
+        animation_logo.setStartValue(0.0)  # 시작 위치와 크기
+        animation_logo.setEndValue(1.0)  # 종료 위치와 크기
+        animation_logo.setEasingCurve(QEasingCurve.InSine)
+        return animation_logo
 
     # noinspection PyMethodMayBeStatic
     def animationShowWidget(self, ui_list, effect_list, animation_list):
