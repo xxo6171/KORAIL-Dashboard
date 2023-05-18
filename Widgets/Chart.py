@@ -44,7 +44,6 @@ class Chart(QWidget):
         self.chart.setBackgroundBrush(QBrush(Qt.transparent))
         self.chart.legend().setVisible(False)
         self.chart.setAnimationOptions(QtCharts.QChart.AllAnimations)
-        # InQuint와 반대로 시작 시간이 길고 끝나는 시간이 짧은 뾰족한 애니메이션 (5차 함수)
         self.chart.setAnimationEasingCurve(QEasingCurve.OutQuint)
 
         title = self.deviceType[idx-1][0]

@@ -1,8 +1,6 @@
-from sys import getsizeof, argv, exit
+from sys import argv, exit
 from time import strftime
 from os import environ
-
-import numpy as np
 
 from functools import partial
 from PySide2.QtCore import Slot, QUrl, QTimer, QPropertyAnimation, QEasingCurve
@@ -27,76 +25,97 @@ class MainWindow(QMainWindow):
         loadJsonStyle(self, self.ui)
 
         self.ui_list = self.ui.getUiList()
-        self.connectClickUi(self.ui_list, self.ui.toolButton)
-
-        self.effect_list = self.getEffectVarList()
-        self.animation_list = self.getAnimationVarList()
-
-        self.opacity_effect_logo = self.opacityEffect()
-        self.animation_return = self.animationShowSplash(self.opacity_effect_logo)
-
-        self.animation_return.start()
-        self.timer.singleShot(4000, lambda: self.ui.page_1.deleteLater())
-
-
-        self.timer.singleShot(4000, lambda: self.animationShowWidget(self.ui_list, self.effect_list, self.animation_list))
+        self.connectClickUi(self.ui_list)
 
         self.model = Model(_date=strftime('%Y%m%d'),
                            _data=getDataNumpy(strftime('%Y%m%d')))
 
-        self.thread_list = Threads().getThreadList()
-        self.timer.singleShot(7500, lambda: self.run(self.ui_list, self.thread_list))
+        self.effects = list(map(self.createOpacityEffect,
+                                [QGraphicsOpacityEffect() for _ in range(12)],
+                                self.ui_list))
 
-    # noinspection PyMethodMayBeStatic
-    def opacityEffect(self):
-        opacity_effect = QGraphicsOpacityEffect()
-        opacity_effect.setOpacity(0)
-        return opacity_effect
+        self.animations = list(map(self.createAnimation,
+                                   [QPropertyAnimation() for _ in range(12)],
+                                   self.effects))
 
-    def animationShowSplash(self, opacity_effect_logo):
-        animation_logo = QPropertyAnimation(opacity_effect_logo, b'opacity')
-        opacity_effect_logo.setOpacity(0)
-        self.ui.label.setGraphicsEffect(opacity_effect_logo)
-        animation_logo.setDuration(1500)
-        animation_logo.setStartValue(0.0)  # 시작 위치와 크기
-        animation_logo.setEndValue(1.0)  # 종료 위치와 크기
-        animation_logo.setEasingCurve(QEasingCurve.InSine)
-        return animation_logo
+        self.showAnimation(self.animations, typeOfList=False)
+        self.timer.singleShot(4000, lambda: self.showAnimation(self.animations, typeOfList=True))
+        self.timer.singleShot(6000, lambda: self.freeAnimation(self.animations))
 
-    # noinspection PyMethodMayBeStatic
-    def animationShowWidget(self, ui_list, effect_list, animation_list):
-        for ui, effect, anim in zip(ui_list, effect_list, animation_list):
-            effect.setOpacity(0)
-            ui.setGraphicsEffect(effect)
-            anim.setDuration(1800)
-            anim.setStartValue(0.0)
-            anim.setEndValue(1.0)
-            # anim.setEasingCurve(QEasingCurve.InExpo)
-            anim.setEasingCurve(QEasingCurve.InSine)
+        #
+        # self.thread_list = Threads().getThreadList()
+        # self.timer.singleShot(7500, lambda: self.run(self.ui_list, self.thread_list))
+
+    # todo: Show animation on splash and main screen
+    def showAnimation(self, animation, typeOfList=True) -> None:
+        if not typeOfList:
+            animation[0].start()
+            return
+        self.ui.page_1.deleteLater()
+        for anim in animation[1:]:
             anim.start()
 
-    # UI 클릭 이벤트 처리
-    def connectClickUi(self, ui_list, btn_back) -> None:
-        for ui in ui_list:
-            idx = np.uint8(ui.objectName().split('_')[1])
-            clickable(ui).connect(partial(self.switchMain2GraphScreen, idx))
-        clickable(btn_back).connect(self.switchGraph2MainScreen)
+    # noinspection PyMethodMayBeStatic
+    # todo: Create opacity effect by widgets and set the ui from opacity effect.
+    def createOpacityEffect(self, effect, ui) -> QGraphicsOpacityEffect:
+        # todo: tool button do not need the effect.
+        if ui.objectName() == 'toolButton':
+            return NotImplemented
+        effect.setOpacity(0)
+        ui.setGraphicsEffect(effect)
+        return effect
 
-    # 계기판 위젯 클릭 시 그래프 화면 이동
+    # noinspection PyMethodMayBeStatic
+    # todo: Create animation by widgets and set the animation options.
+    def createAnimation(self, animation, effect) -> QPropertyAnimation:
+        animation.setTargetObject(effect)
+        animation.setPropertyName(b'opacity')
+        animation.setDuration(1500)
+        animation.setStartValue(0.0)  # Start location, size
+        animation.setEndValue(1.0)  # End location, size
+        animation.setEasingCurve(QEasingCurve.InSine)
+        return animation
+
+    # noinspection PyMethodMayBeStatic
+    # todo: Animation and Effect variables are One-off. Effect variables are automatically free after finishing operate.
+    def freeAnimation(self, animation):
+        for anim in animation:
+            anim.deleteLater()
+
+    # todo: Ui click event.
+    def connectClickUi(self, ui_list) -> None:
+        for ui in ui_list:
+            # todo: Nothing works if ui is label logo.
+            if ui.objectName() == 'label':
+                continue
+            # todo: Connect function to switching graph scene to main scene if ui is toolButton.
+            if ui.objectName() == 'toolButton':
+                clickable(ui).connect(self.switchGraph2MainScreen)
+                continue
+            # todo: Connect function to switching main scene to graph scene if for other ui.
+            idx = int(ui.objectName().split('_')[1])
+            clickable(ui).connect(partial(self.switchMain2GraphScreen, idx))
+
+    # todo: Switching to graph scene when click the widget.
     def switchMain2GraphScreen(self, idx) -> None:
+        chart = self.ui.widget_chart
+        stack = self.ui.stackedWidget
         data = None
         object_id = idx
 
         if self.model.data is not None:
             data = self.model.data[object_id-1, : 50]
 
-        self.ui.widget_chart.displayChart(data, object_id)
-        self.ui.stackedWidget.setCurrentIndex(1)
+        chart.displayChart(data, object_id)
+        stack.setCurrentIndex(1)
 
-    # 뒤로 가기 버튼 클릭 시 메인 화면 이동
+    # todo: Switching to main scene when click the tool button.
     def switchGraph2MainScreen(self) -> None:
-        self.ui.widget_chart.removeChart()
-        self.ui.stackedWidget.setCurrentIndex(0)
+        chart = self.ui.widget_chart
+        stack = self.ui.stackedWidget
+
+        chart.removeChart()
+        stack.setCurrentIndex(0)
 
     # todo: Executing Interface thread
     def run(self, ui_list, thread_list) -> None:
@@ -111,45 +130,11 @@ class MainWindow(QMainWindow):
     def updateInterface(self, obj: object, inv: bool, value: int) -> None:
         obj.updateValue(value, inv)
 
-    def keyPressEvent(self, event):
+    def keyPressEvent(self, event) -> None:
         if event.key() == Qt.Key_Escape:
             self.close()
 
-    def getEffectVarList(self):
-        self.opacity_effect_1 = QGraphicsOpacityEffect()
-        self.opacity_effect_2 = QGraphicsOpacityEffect()
-        self.opacity_effect_3 = QGraphicsOpacityEffect()
-        self.opacity_effect_4 = QGraphicsOpacityEffect()
-        self.opacity_effect_5 = QGraphicsOpacityEffect()
-        self.opacity_effect_6 = QGraphicsOpacityEffect()
-        self.opacity_effect_7 = QGraphicsOpacityEffect()
-        self.opacity_effect_8 = QGraphicsOpacityEffect()
-        self.opacity_effect_9 = QGraphicsOpacityEffect()
-        self.opacity_effect_10 = QGraphicsOpacityEffect()
-        self.opacity_effect_11 = QGraphicsOpacityEffect()
-
-        return [self.opacity_effect_1, self.opacity_effect_2, self.opacity_effect_3, self.opacity_effect_4,
-                self.opacity_effect_5, self.opacity_effect_6, self.opacity_effect_7, self.opacity_effect_8,
-                self.opacity_effect_9, self.opacity_effect_10, self.opacity_effect_11]
-
-    def getAnimationVarList(self):
-        self.animation_1 = QPropertyAnimation(self.opacity_effect_1, b'opacity')
-        self.animation_2 = QPropertyAnimation(self.opacity_effect_2, b'opacity')
-        self.animation_3 = QPropertyAnimation(self.opacity_effect_3, b'opacity')
-        self.animation_4 = QPropertyAnimation(self.opacity_effect_4, b'opacity')
-        self.animation_5 = QPropertyAnimation(self.opacity_effect_5, b'opacity')
-        self.animation_6 = QPropertyAnimation(self.opacity_effect_6, b'opacity')
-        self.animation_7 = QPropertyAnimation(self.opacity_effect_7, b'opacity')
-        self.animation_8 = QPropertyAnimation(self.opacity_effect_8, b'opacity')
-        self.animation_9 = QPropertyAnimation(self.opacity_effect_9, b'opacity')
-        self.animation_10 = QPropertyAnimation(self.opacity_effect_10, b'opacity')
-        self.animation_11 = QPropertyAnimation(self.opacity_effect_11, b'opacity')
-
-        return [self.animation_1, self.animation_2, self.animation_3, self.animation_4,
-                self.animation_5, self.animation_6, self.animation_7, self.animation_8,
-                self.animation_9, self.animation_10, self.animation_11]
-
-# 폰트 크기 고정 ( 화면 크기가 다를 시 발생 하는 문제 해결 )
+# todo: Fix font size: For issues that occur when screen sizes are not the same.
 def suppress_qt_warnings() -> None:
     environ["QT_DEVICE_PIXEL_RATIO"] = "0"
     environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"

@@ -166,5 +166,5 @@ class Ui_MainWindow(object):
     # retranslateUi
 
     def getUiList(self):
-        return [self.widget_1, self.widget_2, self.widget_3, self.widget_4, self.widget_5,
-                self.widget_6, self.widget_7, self.widget_8, self.widget_9, self.widget_10, self.widget_11]
+        return [self.label, self.widget_1, self.widget_2, self.widget_3, self.widget_4, self.widget_5,
+                self.widget_6, self.widget_7, self.widget_8, self.widget_9, self.widget_10, self.widget_11, self.toolButton]
