@@ -11,24 +11,24 @@ from PySide2.QtGui import QPainter, QBrush, QFont, QPen
 class Chart(QWidget):
     def __init__(self, parent=None):
         super(Chart, self).__init__(parent)
-        self.use_timer_event = False
-        self.timer = QTimer(self)
+        self.use_timer_event: bool = False
+        self.timer: QTimer = QTimer(self)
 
-        self.chart_view = None
-        self.chart = None
-        self.series = None
-        self.series2 = None
-        self.layout = None
+        self.chart_view: object = None
+        self.chart: object = None
+        self.series: object = None
+        self.series2: object = None
+        self.layout: object = None
 
-        self.font = QFont('HDharmony M')
+        self.font: QFont = QFont('HDharmony M')
 
-        self.deviceType = [('차량 속도', '속도 (km/h)'),
-                           ('기관 회전 값', 'rpm '), ('기관 온도', '온도 (ºC)'),
-                           ('기관 유압', '압력 (bar)'),
-                           ('변속기 압력', '압력 (bar)'), ('변속기 온도', '온도 (ºC)'),
-                           ('제동칸 압력', '압력 (bar)'), ('제동통 압력', '압력 (bar)'),
-                           ('주공기 압력', '압력 (bar)'),
-                           ('전압', 'V '), ('전류', 'A ')]
+        self.deviceType: list = [('차량 속도', '속도 (km/h)'),
+                                 ('기관 회전 값', 'rpm '), ('기관 온도', '온도 (ºC)'),
+                                 ('기관 유압', '압력 (bar)'),
+                                 ('변속기 압력', '압력 (bar)'), ('변속기 온도', '온도 (ºC)'),
+                                 ('제동칸 압력', '압력 (bar)'), ('제동통 압력', '압력 (bar)'),
+                                 ('주공기 압력', '압력 (bar)'),
+                                 ('전압', 'V '), ('전류', 'A ')]
 
         if self.use_timer_event:
             self.timer.timeout.connect(self.update)
@@ -36,27 +36,25 @@ class Chart(QWidget):
         else:
             self.update()
 
-    def displayChart(self, data, idx):
-        self.layout = QVBoxLayout()
-
-        self.chart = QtCharts.QChart()
+    def displayChart(self, data: list, idx: int):
+        self.chart: QtCharts.QChart = QtCharts.QChart()
         self.chart.setTheme(QtCharts.QChart.ChartThemeDark)
         self.chart.setBackgroundBrush(QBrush(Qt.transparent))
         self.chart.legend().setVisible(False)
         self.chart.setAnimationOptions(QtCharts.QChart.AllAnimations)
         self.chart.setAnimationEasingCurve(QEasingCurve.OutQuint)
 
-        title = self.deviceType[idx-1][0]
-        unit = self.deviceType[idx-1][1]
-        unit2 = '온도'
+        title: str = self.deviceType[idx-1][0]
+        unit: str = self.deviceType[idx-1][1]
+        unit2: str = '온도'
 
         self.chart.setTitle(title)
-        title_font = self.chart.titleFont()
+        title_font: QtCharts.QChart.titleFont = self.chart.titleFont()
         title_font.setFamily(self.font.family())
         title_font.setPointSize(30)
         self.chart.setTitleFont(title_font)
 
-        self.series = QtCharts.QLineSeries()
+        self.series: QtCharts.QLineSeries = QtCharts.QLineSeries()
         self.series.setName(unit.split()[0])
         self.series.setPen(QPen(Qt.cyan, 2))
         if data is not None:
@@ -75,18 +73,18 @@ class Chart(QWidget):
             self.chart.addSeries(self.series2)
 
         # Create a QValueAxis for the x-axis
-        axis_x = QtCharts.QValueAxis()
+        axis_x: QtCharts.QValueAxis = QtCharts.QValueAxis()
         axis_x.setRange(1, 51)
         axis_x.setTickCount(11)
         axis_x.setLabelFormat("%d")
 
         # Create a QValueAxis for the y-axis
-        axis_y = QtCharts.QValueAxis()
+        axis_y: QtCharts.QValueAxis = QtCharts.QValueAxis()
         axis_y.setRange(0, 200)
         axis_y.setTickCount(6)
         axis_y.setLabelFormat("%d")
 
-        axis_y2 = QtCharts.QValueAxis()
+        axis_y2: QtCharts.QValueAxis = QtCharts.QValueAxis()
         axis_y2.setRange(0, 100)
         axis_y2.setTickCount(6)
         axis_y2.setLabelFormat("%d")
@@ -128,15 +126,16 @@ class Chart(QWidget):
         if '압' in unit:
             self.series2.attachAxis(axis_x)
             self.series2.attachAxis(axis_y2)
-            legend = self.chart.legend()
+            legend: QtCharts.QChart.legend = self.chart.legend()
             legend.setFont(QFont(self.font.family(), 15))
             legend.setAlignment(Qt.AlignTop)
             legend.setVisible(True)
 
         # Create a QChartView to display the chart
-        self.chart_view = QtCharts.QChartView(self.chart)
+        self.chart_view: QtCharts.QChartView = QtCharts.QChartView(self.chart)
         self.chart_view.setRenderHint(QPainter.HighQualityAntialiasing)
 
+        self.layout: QVBoxLayout = QVBoxLayout()
         self.layout.addWidget(self.chart_view)
         self.setLayout(self.layout)
 
@@ -147,7 +146,6 @@ class Chart(QWidget):
     def removeChart(self):
         # 메모리 해제
         self.chart.deleteLater()
-        # self.series.deleteLater()
-        # self.series2.deleteLater()
         self.chart_view.deleteLater()
         self.layout.deleteLater()
+

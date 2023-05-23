@@ -1,8 +1,12 @@
+import os.path
 from sys import argv, exit
 from time import strftime
 from os import environ
+from os.path import isfile
 
 from functools import partial
+
+import numpy
 from PySide2.QtCore import Slot, QUrl, QTimer, QPropertyAnimation, QEasingCurve, QObject
 from PySide2.QtGui import Qt, QKeyEvent
 from PySide2.QtWidgets import QMainWindow, QApplication, QGraphicsOpacityEffect
@@ -27,7 +31,12 @@ class MainWindow(QMainWindow):
         self.ui_list: list = self.ui.getUiList()
         self.connectClickUi(self.ui_list)
 
-        self.model: Model = Model(_date=strftime('%Y%m%d'),
+        self.status: bool = True
+        self.enableCalendar()
+
+        self.idx: any = None
+
+        self.model: Model = Model(_date=strftime('%Y.%m.%d'),
                                   _data=getDataNumpy(strftime('%Y%m%d')))
 
         self.effects: list = list(map(self.createOpacityEffect,
@@ -59,7 +68,7 @@ class MainWindow(QMainWindow):
     # todo: Create opacity effect by widgets and set the ui from opacity effect.
     def createOpacityEffect(self, effect: QGraphicsOpacityEffect, ui: QObject) -> QGraphicsOpacityEffect:
         # todo: tool button do not need the effect.
-        if ui.objectName() == 'toolButton':
+        if ui.objectName() in ['toolButton', 'toolButton_calendar', 'pushButton_update']:
             return NotImplemented
         effect.setOpacity(0)
         ui.setGraphicsEffect(effect)
@@ -90,25 +99,40 @@ class MainWindow(QMainWindow):
                 continue
             # todo: Connect function to switching graph scene to main scene if ui is toolButton.
             if ui.objectName() == 'toolButton':
-                clickable(ui).connect(self.switchGraph2MainScreen)
+                clickable(ui).connect(self.switchChart2MainScreen)
                 continue
-            # todo: Connect function to switching main scene to graph scene if for other ui.
+            if ui.objectName() == 'toolButton_calendar':
+                clickable(ui).connect(self.enableCalendar)
+                continue
+            if ui.objectName() == 'pushButton_update':
+                clickable(ui).connect(self.updateChart)
+                continue
+            # todo: Connect function to switching main scene to chart scene if for other ui.
             idx = int(ui.objectName().split('_')[1])
-            clickable(ui).connect(partial(self.switchMain2GraphScreen, idx))
+            clickable(ui).connect(partial(self.switchMain2ChartScreen, idx))
 
-    # todo: Switching to graph scene when click the widget.
-    def switchMain2GraphScreen(self, idx: int) -> None:
-        data = None
-        object_id = idx
+    def enableCalendar(self) -> None:
+        self.status = not self.status
+        self.ui.calendarWidget.setVisible(self.status)
+        self.ui.pushButton_update.setVisible(self.status)
 
-        if self.model.data is not None:
-            data = self.model.data[object_id-1, : 50]
+    def updateChart(self) -> None:
+        self.enableCalendar()
+        date: str = self.ui.calendarWidget.selectedDate().toString('yyyy.MM.dd')
+        data: numpy.ndarray = getDataNumpy(date.replace('.', ''))[self.idx-1, :50]
+        self.ui.label_date.setText(date)
+        self.ui.widget_chart.removeChart()
+        self.timer.singleShot(100, lambda: self.ui.widget_chart.displayChart(data if data is not None else None, self.idx))
 
-        self.ui.widget_chart.displayChart(data, object_id)
+    # todo: Switching main to chart scene when click the widget.
+    def switchMain2ChartScreen(self, idx: int) -> None:
+        self.idx = idx
+        self.ui.widget_chart.displayChart(self.model.data[self.idx-1, : 50] if self.model.data is not None else None, self.idx)
         self.ui.stackedWidget.setCurrentIndex(1)
 
-    # todo: Switching to main scene when click the tool button.
-    def switchGraph2MainScreen(self) -> None:
+    # todo: Switching chart to main scene when click the tool button.
+    def switchChart2MainScreen(self) -> None:
+        self.ui.label_date.setText(self.model.date)
         self.ui.widget_chart.removeChart()
         self.ui.stackedWidget.setCurrentIndex(0)
 

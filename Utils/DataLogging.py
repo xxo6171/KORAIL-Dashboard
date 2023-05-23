@@ -1,3 +1,4 @@
+import os
 import sys
 from os import path
 import time
@@ -7,11 +8,11 @@ import multiprocessing as mp
 
 # todo: Convert Text data to Numpy array
 def txt2Numpy(filepath):
-    return np.loadtxt(filepath, dtype=np.uint8, delimiter=' ')
+    return np.loadtxt(filepath, dtype=np.uint16, delimiter=' ')
 
 # todo: Get File data to numpy array
-def getDataNumpy(date):
-    filepath = [f'LogData/widget{i}_{date}.txt' for i in range(1, 12)]
+def getDataNumpy(date: str):
+    filepath = [f'LogData/{date}/widget{i}.txt' for i in range(1, 12)]
     for file in filepath:
         if not path.exists(file):
             return None
@@ -41,9 +42,12 @@ def getDataList(date):
     return list(map(txt2List, filepath))
 
 def dataLogging(widget, date):
+    if not os.path.isdir(f'../LogData/{date}'):
+        os.mkdir(f'../LogData/{date}')
+
     for i in range(1, 12):
         t = 1
-        filepath = f'../LogData/{widget}{i}_{date}.txt'
+        filepath = f'../LogData/{date}/{widget}{i}.txt'
         with open(filepath, "w" if not path.exists(filepath) else "a") as f:
             while True:
                 try:
@@ -60,7 +64,10 @@ def dataLogging(widget, date):
 
 if __name__ == '__main__':
     date = time.strftime('%Y%m%d')
-    dataLogging('widget', date)
+    dataLogging('widget', '20230519')
+
+
+
 #     print('Writing Done')
 #     # file_size = os.path.getsize('../LogData/widget1_20230417.txt')
 #     # print("파일 크기: %.2fMB" % (file_size / (1024.0 ** 2)))

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'interfacenlwxSb.ui'
+## Form generated from reading UI file 'interfacefeRpOl.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1024, 768)
+        MainWindow.resize(1020, 768)
         MainWindow.setStyleSheet(u"background-color: rgb(0, 0, 0);\n"
 "background-color: qlineargradient(spread:reflect, x1:0.506, y1:0.523, x2:1, y2:1, stop:0.281755 rgba(15, 15, 15, 255), stop:1 rgba(22, 52, 83, 255))")
         self.centralwidget = QWidget(MainWindow)
@@ -136,7 +136,7 @@ class Ui_MainWindow(object):
         self.widget_chart.setStyleSheet(u"")
         self.label_date = QLabel(self.page_4)
         self.label_date.setObjectName(u"label_date")
-        self.label_date.setGeometry(QRect(800, 30, 221, 31))
+        self.label_date.setGeometry(QRect(730, 30, 221, 31))
         self.label_date.setStyleSheet(u"color: white;\n"
 "font: 24pt HDharmony B;\n"
 "background-color: rgba(0, 0, 0, 0);")
@@ -149,6 +149,53 @@ class Ui_MainWindow(object):
 "border-radius: 15px")
         self.toolButton.setAutoRaise(False)
         self.toolButton.setArrowType(Qt.LeftArrow)
+        self.toolButton_calendar = QToolButton(self.page_4)
+        self.toolButton_calendar.setObjectName(u"toolButton_calendar")
+        self.toolButton_calendar.setGeometry(QRect(950, 30, 50, 31))
+        self.toolButton_calendar.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"background-color: rgb(255, 255, 255);\n"
+"border-radius: 15px")
+        self.toolButton_calendar.setAutoRaise(False)
+        self.toolButton_calendar.setArrowType(Qt.NoArrow)
+        self.calendarWidget = QCalendarWidget(self.page_4)
+        self.calendarWidget.setObjectName(u"calendarWidget")
+        self.calendarWidget.setGeometry(QRect(539, 70, 461, 351))
+        self.calendarWidget.setStyleSheet(u"QCalendarWidget QToolButton{\n"
+"	height: 40px;\n"
+"	color: black;\n"
+"}\n"
+"QCalendarWidget QToolButton#qt_calendar_prevmonth{\n"
+"	width: 50px;\n"
+"	background-color: gray;\n"
+"}\n"
+"QCalendarWidget QToolButton#qt_calendar_nextmonth{\n"
+"	width: 50px;\n"
+"	background-color: gray;\n"
+"}\n"
+"QCalendarWidget QToolButton::hover{\n"
+"	background-color: gray;\n"
+"}\n"
+"QCalendarWidget QWidget{\n"
+"	font: 18pt HDharmony M;\n"
+"	alternate-background-color: rgb(220,220,220);\n"
+"	background-color: rgba(180, 180, 180);\n"
+"}\n"
+"")
+        self.calendarWidget.setFirstDayOfWeek(Qt.Sunday)
+        self.calendarWidget.setGridVisible(False)
+        self.calendarWidget.setSelectionMode(QCalendarWidget.SingleSelection)
+        self.calendarWidget.setHorizontalHeaderFormat(QCalendarWidget.SingleLetterDayNames)
+        self.calendarWidget.setVerticalHeaderFormat(QCalendarWidget.NoVerticalHeader)
+        self.calendarWidget.setNavigationBarVisible(True)
+        self.calendarWidget.setDateEditEnabled(False)
+        self.pushButton_update = QPushButton(self.page_4)
+        self.pushButton_update.setObjectName(u"pushButton_update")
+        self.pushButton_update.setGeometry(QRect(540, 420, 461, 41))
+        self.pushButton_update.setStyleSheet(u"QPushButton{\n"
+"	background-color: white;\n"
+"	font: 18pt HDharmony M;\n"
+"	background-color: rgba(220, 220, 220);\n"
+"}")
         self.stackedWidget.addWidget(self.page_4)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -163,8 +210,11 @@ class Ui_MainWindow(object):
         self.label.setText("")
         # self.label_loading.setText(QCoreApplication.translate("MainWindow", u"LOADING...", None))
         self.label_date.setText(QCoreApplication.translate("MainWindow", strftime(u"%Y.%m.%d"), None))
+        self.pushButton_update.setText(QCoreApplication.translate("MainWindow", u"\ucc28\ud2b8 \uac31\uc2e0", None))
     # retranslateUi
 
     def getUiList(self):
         return [self.label, self.widget_1, self.widget_2, self.widget_3, self.widget_4, self.widget_5,
-                self.widget_6, self.widget_7, self.widget_8, self.widget_9, self.widget_10, self.widget_11, self.toolButton]
+                self.widget_6, self.widget_7, self.widget_8, self.widget_9, self.widget_10, self.widget_11, self.toolButton,
+                self.toolButton_calendar, self.pushButton_update]
+
