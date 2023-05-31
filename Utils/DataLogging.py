@@ -30,17 +30,6 @@ def getDataNumpyParallel(date):
     pool.join()
     return result.copy()
 
-def txt2List(filepath):
-    with open(filepath, 'r') as f:
-        return [s.strip().split() for s in f.readlines()]
-
-def getDataList(date):
-    filepath = [f'../LogData/widget{i}_{date}.txt' for i in range(1, 12)]
-    for file in filepath:
-        if not path.exists(file):
-            return None
-    return list(map(txt2List, filepath))
-
 def dataLogging(widget, date):
     if not os.path.isdir(f'../LogData/{date}'):
         os.mkdir(f'../LogData/{date}')
@@ -64,25 +53,5 @@ def dataLogging(widget, date):
 
 if __name__ == '__main__':
     date = time.strftime('%Y%m%d')
-    dataLogging('widget', '20230519')
-
-
-
-#     print('Writing Done')
-#     # file_size = os.path.getsize('../LogData/widget1_20230417.txt')
-#     # print("파일 크기: %.2fMB" % (file_size / (1024.0 ** 2)))
-#
-#     start_time = time.time()
-#     result1 = getDataNumpy(date)
-#     end_time = time.time()
-#     print('numpy execution time: ', end_time - start_time)
-#
-#     start_time = time.time()
-#     result2 = getDataNumpyParallel(date)
-#     end_time = time.time()
-#     print('Parallelized numpy execution time: ', end_time - start_time)
-#
-#     print('numpy shape: ', result1.shape)
-#     print('numpy shape: ', result2.shape)
-#     print('Compare two arrays for equality: ', np.array_equal(result1, result2))
+    dataLogging('widget', date)
 

@@ -1,12 +1,9 @@
-import os.path
 from sys import argv, exit
 from time import strftime
 from os import environ
-from os.path import isfile
-
 from functools import partial
 
-import numpy
+import numpy as np
 from PySide2.QtCore import Slot, QUrl, QTimer, QPropertyAnimation, QEasingCurve, QObject
 from PySide2.QtGui import Qt, QKeyEvent
 from PySide2.QtWidgets import QMainWindow, QApplication, QGraphicsOpacityEffect
@@ -32,7 +29,7 @@ class MainWindow(QMainWindow):
         self.connectClickUi(self.ui_list)
 
         self.status: bool = True
-        self.enableCalendar()
+        self.showEnableCalendar()
 
         self.idx: any = None
 
@@ -52,8 +49,8 @@ class MainWindow(QMainWindow):
         self.timer.singleShot(6000, lambda: self.freeAnimation(self.animations))
 
         #
-        # self.thread_list = Threads().getThreadList()
-        # self.timer.singleShot(7500, lambda: self.run(self.ui_list, self.thread_list))
+        self.thread_list = Threads().getThreadList()
+        self.timer.singleShot(7500, lambda: self.run(self.ui_list[1:12], self.thread_list))
 
     # todo: Show animation on splash and main screen
     def showAnimation(self, animation: list, typeOfList: bool = True) -> None:
@@ -102,7 +99,7 @@ class MainWindow(QMainWindow):
                 clickable(ui).connect(self.switchChart2MainScreen)
                 continue
             if ui.objectName() == 'toolButton_calendar':
-                clickable(ui).connect(self.enableCalendar)
+                clickable(ui).connect(self.showEnableCalendar)
                 continue
             if ui.objectName() == 'pushButton_update':
                 clickable(ui).connect(self.updateChart)
@@ -111,23 +108,25 @@ class MainWindow(QMainWindow):
             idx = int(ui.objectName().split('_')[1])
             clickable(ui).connect(partial(self.switchMain2ChartScreen, idx))
 
-    def enableCalendar(self) -> None:
+    # todo: Show Calendar when calendar icon button clicked.
+    def showEnableCalendar(self) -> None:
         self.status = not self.status
         self.ui.calendarWidget.setVisible(self.status)
         self.ui.pushButton_update.setVisible(self.status)
 
     def updateChart(self) -> None:
-        self.enableCalendar()
+        self.showEnableCalendar()
         date: str = self.ui.calendarWidget.selectedDate().toString('yyyy.MM.dd')
-        data: numpy.ndarray = getDataNumpy(date.replace('.', ''))[self.idx-1, :50]
+        data: np.ndarray = getDataNumpy(date.replace('.', ''))
         self.ui.label_date.setText(date)
         self.ui.widget_chart.removeChart()
-        self.timer.singleShot(100, lambda: self.ui.widget_chart.displayChart(data if data is not None else None, self.idx))
+        self.timer.singleShot(50, lambda: self.ui.widget_chart.displayChart(data[self.idx-1, :50] if data is not None else None, self.idx))
 
     # todo: Switching main to chart scene when click the widget.
     def switchMain2ChartScreen(self, idx: int) -> None:
-        self.idx = idx
-        self.ui.widget_chart.displayChart(self.model.data[self.idx-1, : 50] if self.model.data is not None else None, self.idx)
+        self.idx: int = idx
+        data: np.ndarray = self.model.data
+        self.ui.widget_chart.displayChart(data[self.idx-1, : 50] if self.model.data is not None else None, self.idx)
         self.ui.stackedWidget.setCurrentIndex(1)
 
     # todo: Switching chart to main scene when click the tool button.

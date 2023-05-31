@@ -67,9 +67,10 @@ class Chart(QWidget):
             self.series2.setName(unit2)
 
             self.series2.setPen(QPen(Qt.red, 2))
-            for i in range(1, 51):
-                value = random.randrange(20, 50)
-                self.series2.append(i, value)
+            if data is not None:
+                for i in range(1, 51):
+                    value = random.randrange(20, 50)
+                    self.series2.append(i, value)
             self.chart.addSeries(self.series2)
 
         # Create a QValueAxis for the x-axis
