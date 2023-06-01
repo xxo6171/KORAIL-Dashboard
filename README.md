@@ -19,8 +19,9 @@
 `python: 3.8.x  `
 
 **Library**
-```commandline
+```
 pip install pyside2
+pip install qtpy # for abstracted qt
 pip install numpy
 ```
 ## References
