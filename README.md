@@ -59,3 +59,8 @@ pip install numpy
       ```
     * 데이터 생성 되는 위치는 /LogData/ 입니다.
     * ![img_6.png](Images/img_6.png)
+
+## Contact
+* kmlee@esntech.co.kr
+
+
