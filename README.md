@@ -16,7 +16,7 @@
 ![img_2.png](img_2.png)
 ## Requirement
 **python version**
-* `python: 3.8.x  `
+`python: 3.8.x  `
 
 **Library**
 ```commandline
