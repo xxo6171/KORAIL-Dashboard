@@ -1,6 +1,5 @@
 # KORAIL-Dashboard
 ## Description
-___
 * 견인용 철도 차량 디지털 현시 장치를 위한 프로그램입니다.
 * python 기반으로 개발 중이며 GUI 라이브러리인 PySide2를 사용합니다. 
 * 실제 철도 차량 하드웨어 장치 간 통신을 통해 계기판의 실시간 갱신과 각 데이터를 기록합니다.
@@ -9,7 +8,6 @@ ___
 
 
 ## Image
-___
 ### 초기 로고 화면
 ![img_1.png](img_1.png)
 ### 메인 화면
@@ -17,7 +15,6 @@ ___
 ### 그래프 화면
 ![img_2.png](img_2.png)
 ## Requirement
-___
 **python version**
 * `python: 3.8.x  `
 
@@ -27,14 +24,12 @@ pip install pyside2
 pip install numpy
 ```
 ## References
-___
 * 계기판 Widget
   * https://khamisikibet.github.io/QT-PyQt-PySide-Custom-Widgets/docs/custom-analog-gauge.html
   * https://github.com/KhamisiKibet/QT-PyQt-PySide-Custom-Widgets
   * https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases
   * https://www.youtube.com/watch?v=5WHnlRQcUy4&feature=youtu.be
 ## Notes
-___
 * pyqt5와 달리 pyside2는 Qt Designer 에서 수정 시 UI를 파이썬 파일로 저장하여 바인딩됩니다.
   * `수정 후 상단 폼 -> Python code 보기 -> 저장 아이콘 클릭`
   * ![img_3.png](img_3.png)
