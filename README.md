@@ -9,11 +9,11 @@
 
 ## Image
 ### 초기 로고 화면
-![img_1.png](img_1.png)
+![img_1.png](Images/img_1.png)
 ### 메인 화면
-![img.png](img.png)
+![img.png](Images/img.png)
 ### 그래프 화면
-![img_2.png](img_2.png)
+![img_2.png](Images/img_2.png)
 ## Requirement
 **python version**  
 `python: 3.8.x  `
@@ -32,8 +32,8 @@ pip install numpy
 ## Notes
 * pyqt5와 달리 pyside2는 Qt Designer 에서 수정 시 UI를 파이썬 파일로 저장하여 바인딩됩니다.
   * `수정 후 상단 폼 -> Python code 보기 -> 저장 아이콘 클릭`
-  * ![img_3.png](img_3.png)
-  * ![img_4.png](img_4.png)
+  * ![img_3.png](Images/img_3.png)
+  * ![img_4.png](Images/img_4.png)
   * interface_ui.py에서 getUiList() 함수를 추가 하여 주시면 됩니다.
   * ```
     def getUiList(self):
@@ -43,7 +43,7 @@ pip install numpy
 * KORAIL 로고 관련 이슈
   * Qt Designer 수정 및 업데이트 후 interface_ui.py를 열면 상측 import 부분에 Korail 이미지 부분 수정이 필요합니다.
     * `import Images.korail` 코드 추가
-    * ![img_5.png](img_5.png)
+    * ![img_5.png](Images/img_5.png)
 * 각 계기판의 디자인은 Reference에 명시된 계기판 Widget 관련 자료를 통해 개발되었습니다.
   * AnalogGaugeWidget.py: 원 계기판
   * LinearGaugeWidget.py: 막대 계기판
@@ -58,4 +58,4 @@ pip install numpy
       dataLogging('widget', date) # date 값 임의 변경 가능
       ```
     * 데이터 생성 되는 위치는 /LogData/ 입니다.
-    * ![img_6.png](img_6.png)
+    * ![img_6.png](Images/img_6.png)
