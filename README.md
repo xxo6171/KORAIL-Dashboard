@@ -15,7 +15,7 @@
 ### 그래프 화면
 ![img_2.png](img_2.png)
 ## Requirement
-**python version**
+**python version**  
 `python: 3.8.x  `
 
 **Library**
