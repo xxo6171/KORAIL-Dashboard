@@ -48,9 +48,9 @@ class MainWindow(QMainWindow):
         self.timer.singleShot(4000, lambda: self.showAnimation(self.animations, typeOfList=True))
         self.timer.singleShot(6000, lambda: self.freeAnimation(self.animations))
 
-        #
         self.thread_list = Threads().getThreadList()
-        self.timer.singleShot(7500, lambda: self.run(self.ui_list[1:12], self.thread_list))
+        # Start Thread
+        # self.timer.singleShot(7500, lambda: self.run(self.ui_list[1:12], self.thread_list))
 
     # todo: Show animation on splash and main screen
     def showAnimation(self, animation: list, typeOfList: bool = True) -> None:
