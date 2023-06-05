@@ -7,7 +7,7 @@ from PySide2.QtCore import QTimer, Qt, QEasingCurve
 from PySide2.QtCharts import QtCharts
 from PySide2.QtGui import QPainter, QBrush, QFont, QPen
 
-
+# 차트 클래스, 구현 완료는 아님
 class Chart(QWidget):
     def __init__(self, parent=None):
         super(Chart, self).__init__(parent)
@@ -145,7 +145,6 @@ class Chart(QWidget):
 
     # 메모리 해제
     def removeChart(self):
-        # 메모리 해제
         self.chart.deleteLater()
         self.chart_view.deleteLater()
         self.layout.deleteLater()
