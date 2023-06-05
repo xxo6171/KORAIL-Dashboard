@@ -4,7 +4,6 @@ from os import path
 import time
 import random
 import numpy as np
-import multiprocessing as mp
 
 # todo: Convert Text data to Numpy array
 def txt2Numpy(filepath):
@@ -18,18 +17,9 @@ def getDataNumpy(date: str):
             return None
     return np.array(list(map(txt2Numpy, filepath))).copy()
 
-# todo: Get File data to numpy array using Parallel
-def getDataNumpyParallel(date):
-    filepath = [f'LogData/widget{i}_{date}.txt' for i in range(1, 12)]
-    for file in filepath:
-        if not path.exists(file):
-            return None
-    pool = mp.Pool(processes=mp.cpu_count())
-    result = np.array(list(pool.map(txt2Numpy, filepath)))
-    pool.close()
-    pool.join()
-    return result.copy()
-
+# 임의의 데이터 생성
+# 각 계기판 별 랜덤 데이터를 생성하여 txt에 저장
+# 11개의 파일이 생성 됨
 def dataLogging(widget, date):
     if not os.path.isdir(f'../LogData/{date}'):
         os.mkdir(f'../LogData/{date}')
