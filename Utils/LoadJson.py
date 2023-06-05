@@ -4,6 +4,8 @@ import json
 from qtpy.QtCore import *
 from qtpy.QtGui import *
 
+# 계기판 디자인 수정 시
+# style.json 파일에서 편리하게 설정 가능하도록 만들어짐
 def loadJsonStyle(self, ui, **jsonFiles):
 
     self.customWidgetsThreadpool = QThreadPool()
