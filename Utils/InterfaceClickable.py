@@ -1,6 +1,6 @@
 from qtpy.QtCore import QObject, Signal, QEvent
 
-# Output Widget click sound
+# 오브젝트 클릭 함수
 def clickable(widget):
     class Filter(QObject):
         # clicked = pyqtSignal()
